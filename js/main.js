@@ -1,0 +1,71 @@
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+
+// preloader
+let n=0;const cnt=$('#cnt'),t=setInterval(()=>{n+=Math.ceil(Math.random()*9);if(n>=100){n=100;clearInterval(t);setTimeout(()=>{$('#pre').classList.add('done');$('#h1').classList.add('in')},300)}cnt.textContent=n},60);
+// reveal on scroll
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
+$$('.rv').forEach(el=>io.observe(el));
+// scroll-linked: parallax + pinned horizontal track
+const track=$('#track'),pin=$('#work'),prog=$('#prog'),par=$$('[data-par]'),hero=$('#heroimg');
+function tick(){
+  const y=scrollY,vh=innerHeight;
+  par.forEach(el=>{const r=el.getBoundingClientRect();el.style.transform=`translateY(${(r.top-vh/2)*-el.dataset.par}px)`});
+  const r=pin.getBoundingClientRect(),max=pin.offsetHeight-vh,p=Math.min(1,Math.max(0,-r.top/max));
+  track.style.transform=`translateX(${-p*(track.scrollWidth-innerWidth)}px)`;prog.style.width=p*100+'%';
+  requestAnimationFrame(tick)}
+tick();
+// service hover image follows cursor
+const hov=$('#hov');let mx=0,my=0,cx=0,cy=0;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function f(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;hov.style.left=cx+'px';hov.style.top=cy+'px';requestAnimationFrame(f)})();
+$$('.svc a').forEach(a=>{a.onmouseenter=()=>{if(a.dataset.g)hov.className='ph on '+a.dataset.g};a.onmouseleave=()=>hov.classList.remove('on')});
+// router with curtain transition
+const P={skyline:{t:'Skyline Residence',c:'Living Space',k:'living',loc:'East Legon, Accra',y:'2025',a:'780 m\u00b2',i:3,g:[12,7,4,1],d:'A residence composed around a panoramic city view, layered with sculpted seating, a sculptural glass chandelier and a fireplace wall in stone.'},noir:{t:'Noir Dining Room',c:'Dining Room',k:'dining',loc:'Airport Residential, Accra',y:'2025',a:'120 m\u00b2',i:5,g:[1,4,10,2],d:'Charcoal panelling, herringbone walnut and halo lighting create a dining room that feels like an evening in itself.'},halo:{t:'Halo Penthouse',c:'Living Space',k:'living',loc:'Cantonments, Accra',y:'2024',a:'540 m\u00b2',i:8,g:[7,12,2,10],d:'A starlit ceiling, glass staircase and a fireplace set into white stone turn a penthouse lounge into a night-sky retreat.'},atelier:{t:"Chef's Atelier",c:'Kitchen',k:'kitchen',loc:'Labone, Accra',y:'2024',a:'210 m\u00b2',i:6,g:[1,2,12,4],d:'A waterfall marble island, matte black cabinetry and a crystal light bar make this kitchen a stage for entertaining.'},spiral:{t:'Spiral House',c:'Living Space',k:'living',loc:'Trasacco Valley, Accra',y:'2023',a:'960 m\u00b2',i:9,g:[10,12,7,4],d:'A sculpted timber staircase sweeps through a double-height lounge, polished marble floors carrying light through every room.'},kyoto:{t:'Kyoto Suite',c:'Living Space',k:'living',loc:'Osu, Accra',y:'2023',a:'320 m\u00b2',i:11,g:[12,7,2,10],d:'Timber lattice screens, warm cove lighting and a mirror-polished floor bring quiet Japanese restraint to an Accra apartment.'}};
+const ids=Object.keys(P);
+const viewer=$('#gallery-viewer'),viewerImage=$('#viewer-image'),viewerTitle=$('#viewer-title'),viewerCount=$('#viewer-count'),viewerCaption=$('#viewer-caption'),viewerThumbs=$('#viewer-thumbs');
+let galleryImages=[],galleryIndex=0,galleryTitle='';
+function renderGallery(){
+  const image=galleryImages[galleryIndex];
+  viewerImage.className='ph im'+image;
+  viewerImage.setAttribute('aria-label',`${galleryTitle}, photo ${galleryIndex+1} of ${galleryImages.length}`);
+  viewerTitle.textContent=galleryTitle;
+  viewerCount.textContent=`${String(galleryIndex+1).padStart(2,'0')} / ${String(galleryImages.length).padStart(2,'0')}`;
+  viewerCaption.textContent=`${galleryTitle} · Photo ${galleryIndex+1}`;
+  viewerThumbs.innerHTML=galleryImages.map((photo,index)=>`<button class="viewer-thumb${index===galleryIndex?' active':''}" type="button" data-viewer-index="${index}" aria-label="Show photo ${index+1}" aria-pressed="${index===galleryIndex}"><span class="ph im${photo}" aria-hidden="true"></span></button>`).join('');
+}
+function moveGallery(step){galleryIndex=(galleryIndex+step+galleryImages.length)%galleryImages.length;renderGallery()}
+function openGallery(index){
+  galleryIndex=index;
+  renderGallery();
+  viewer.showModal();
+}
+$('#pj-open').addEventListener('click',()=>openGallery(0));
+$('#pj-g').addEventListener('click',e=>{const photo=e.target.closest('[data-gallery-index]');if(photo)openGallery(Number(photo.dataset.galleryIndex))});
+$('#viewer-close').addEventListener('click',()=>viewer.close());
+$('#viewer-prev').addEventListener('click',()=>moveGallery(-1));
+$('#viewer-next').addEventListener('click',()=>moveGallery(1));
+viewerThumbs.addEventListener('click',e=>{const thumb=e.target.closest('[data-viewer-index]');if(thumb){galleryIndex=Number(thumb.dataset.viewerIndex);renderGallery()}});
+viewer.addEventListener('click',e=>{if(e.target===viewer)viewer.close()});
+$('#track').innerHTML=ids.slice(0,4).map(id=>`<a class="card" href="#/project/${id}"><div class="ph im${P[id].i}"></div><small>${P[id].c} \u00b7 ${P[id].y}</small><h3 class="serif">${P[id].t}</h3></a>`).join('');
+$('.grid').innerHTML=ids.map(id=>`<a class="it rv" data-c="${P[id].k}" href="#/project/${id}"><div class="w"><div class="ph im${P[id].i}"></div></div><small>${P[id].c} \u00b7 ${P[id].y}</small><h3 class="serif">${P[id].t}</h3></a>`).join('');
+$$('.grid .it').forEach(e=>io.observe(e));
+$('#idx').innerHTML=ids.map((id,k)=>`<a href="#/project/${id}" data-i="${P[id].i}"><span>0${k+1}</span><b>${P[id].t}</b><em>${P[id].c}</em></a>`).join('');
+const h2=$('#heroimg2');$$('#idx a').forEach(a=>{a.onmouseenter=()=>{h2.className='ph on im'+a.dataset.i};a.onmouseleave=()=>h2.classList.remove('on')});
+const AR=[...ids.map(id=>({id,t:P[id].t,ty:P[id].c,loc:P[id].loc,y:P[id].y,i:P[id].i})),{t:'Ember Kitchen',ty:'Kitchen',loc:'Dzorwulu, Accra',y:'2022',i:1},{t:'Aura Smart Kitchen',ty:'Kitchen',loc:'Tema, Community 25',y:'2022',i:2},{t:'Blossom Dining',ty:'Dining Room',loc:'Weija, Accra',y:'2021',i:4},{t:'Azure Lounge',ty:'Living Space',loc:'Spintex, Accra',y:'2021',i:7},{t:'Grand Foyer',ty:'Living Space',loc:'Aburi',y:'2020',i:10},{t:'Marble Gallery House',ty:'Living Space',loc:'Adjiringanor',y:'2020',i:12}].sort((a,b)=>b.y-a.y);
+$('#arch').innerHTML=AR.map(r=>`<${r.id?'a href="#/project/'+r.id+'"':'div'} class="row" data-i="${r.i}"><span>${r.y}</span><b>${r.t}</b><span>${r.ty}</span><span>${r.loc}</span><span>${r.id?'\u2197':''}</span></${r.id?'a':'div'}>`).join('');
+$$('.arch .row').forEach(a=>{a.onmouseenter=()=>{hov.className='ph on im'+a.dataset.i};a.onmouseleave=()=>hov.classList.remove('on')});
+const menu=$('#menu'),mt=o=>{menu.classList.toggle('open',o);document.body.style.overflow=o?'hidden':''};
+$('#mbtn').onclick=()=>mt(true);$('#mx').onclick=()=>mt(false);menu.addEventListener('click',e=>{if(e.target.closest('li a'))mt(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape')mt(false);if(viewer.open&&e.key==='ArrowLeft'){e.preventDefault();moveGallery(-1)}if(viewer.open&&e.key==='ArrowRight'){e.preventDefault();moveGallery(1)}});
+function fill(id){const p=P[id],i=ids.indexOf(id),n=(i+1)%ids.length;$('#pj-img').className='ph im'+p.i;$('#pj-c').textContent=p.c;$('#pj-tt').textContent=p.t;$('#pj-l').textContent=p.loc;$('#pj-y').textContent=p.y;$('#pj-a').textContent=p.a;$('#pj-k').textContent=p.c;$('#pj-d').textContent=p.d;galleryImages=[p.i,...p.g];galleryTitle=p.t;$('#pj-g').innerHTML=galleryImages.map((k,index)=>`<button class="gallery-thumb rv" type="button" data-gallery-index="${index}" aria-label="Open photo ${index+1} of ${galleryImages.length} for ${p.t}"><span class="ph im${k}" aria-hidden="true"></span></button>`).join('');$$('#pj-g .rv').forEach(e=>io.observe(e));$('#pj-n').href='#/project/'+ids[n];$('#pj-nt').textContent=P[ids[n]].t}
+const cur=$('#cur'),R=['','about','projects','archive','services','contact'];let now=null;
+const cio=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){const el=x.target,to=+el.dataset.count,s=performance.now();(function u(t){const k=Math.min(1,(t-s)/1800);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(u)})(s);cio.unobserve(el)}}));
+$$('[data-count]').forEach(el=>cio.observe(el));
+function show(r){if(viewer.open)viewer.close();const pr=r.startsWith('project/');$$('.links a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#/'+(pr?'projects':r)));if(pr)fill(r.slice(8));const id=pr?'project':r;$$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+id));scrollTo(0,0);const h=$('#p-'+id+' .pho h1');if(h){h.classList.remove('in');setTimeout(()=>h.classList.add('in'),80)}}
+function route(){let r=location.hash.replace('#/','').replace('#','');if(!R.includes(r)&&!(r.startsWith('project/')&&P[r.slice(8)]))r='';if(r===now)return;const first=now===null;now=r;if(first){show(r);return}
+ cur.className='cur c';setTimeout(()=>{show(r);cur.className='cur o';setTimeout(()=>{cur.style.transition='none';cur.className='cur';requestAnimationFrame(()=>requestAnimationFrame(()=>cur.style.transition=''))},800)},780)}
+addEventListener('hashchange',route);route();
+$$('.chips button').forEach(b=>b.onclick=()=>{$$('.chips button').forEach(x=>x.classList.toggle('on',x===b));$$('.it').forEach(i=>i.classList.toggle('h',b.dataset.f!=='all'&&i.dataset.c!==b.dataset.f))});
+$('#send').onclick=function(){const t=`Hello AMB Home of Interiors, my name is ${$('#fn').value||'-'}. Phone: ${$('#fe').value||'-'}. Project: ${$('#fs').value}. ${$('#fm').value}`;this.href='https://wa.me/233599600001?text='+encodeURIComponent(t);this.target='_blank';this.rel='noopener';$('#ok').style.display='block'};
+$$('.card,.it').forEach(a=>{const g=a.classList.contains('card')?$$('.card'):$$('.it');a.href='#/project/'+ids[g.indexOf(a)]});
