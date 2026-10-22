@@ -58,11 +58,37 @@ $$('.arch .row').forEach(a=>{a.onmouseenter=()=>{hov.className='ph on im'+a.data
 const menu=$('#menu'),mt=o=>{menu.classList.toggle('open',o);document.body.style.overflow=o?'hidden':''};
 $('#mbtn').onclick=()=>mt(true);$('#mx').onclick=()=>mt(false);menu.addEventListener('click',e=>{if(e.target.closest('li a'))mt(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape')mt(false);if(viewer.open&&e.key==='ArrowLeft'){e.preventDefault();moveGallery(-1)}if(viewer.open&&e.key==='ArrowRight'){e.preventDefault();moveGallery(1)}});
-function fill(id){const p=P[id],i=ids.indexOf(id),n=(i+1)%ids.length;$('#pj-img').className='ph im'+p.i;$('#pj-c').textContent=p.c;$('#pj-tt').textContent=p.t;$('#pj-l').textContent=p.loc;$('#pj-y').textContent=p.y;$('#pj-a').textContent=p.a;$('#pj-k').textContent=p.c;$('#pj-d').textContent=p.d;galleryImages=[p.i,...p.g];galleryTitle=p.t;$('#pj-g').innerHTML=galleryImages.map((k,index)=>`<button class="gallery-thumb rv" type="button" data-gallery-index="${index}" aria-label="Open photo ${index+1} of ${galleryImages.length} for ${p.t}"><span class="ph im${k}" aria-hidden="true"></span></button>`).join('');$$('#pj-g .rv').forEach(e=>io.observe(e));$('#pj-n').href='#/project/'+ids[n];$('#pj-nt').textContent=P[ids[n]].t}
+function fill(id){
+  const p=P[id],i=ids.indexOf(id),n=(i+1)%ids.length;
+  $('#pj-img').className='ph im'+p.i;
+  $('#pj-c').textContent=p.c;
+  $('#pj-tt').textContent=p.t;
+  $('#pj-l').textContent=p.loc;
+  $('#pj-y').textContent=p.y;
+  $('#pj-a').textContent=p.a;
+  $('#pj-k').textContent=p.c;
+  $('#pj-d').textContent=p.d;
+  galleryImages=[p.i,...p.g];
+  galleryTitle=p.t;
+  $('#pj-g').innerHTML=galleryImages.map((k,index)=>`<button class="gallery-thumb" type="button" data-gallery-index="${index}" aria-label="Open photo ${index+1} of ${galleryImages.length} for ${p.t}"><span class="ph im${k}" aria-hidden="true"></span></button>`).join('');
+  $('#pj-n').href='#/project/'+ids[n];
+  $('#pj-nt').textContent=P[ids[n]].t;
+}
 const cur=$('#cur'),R=['','about','projects','archive','services','contact'];let now=null;
 const cio=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){const el=x.target,to=+el.dataset.count,s=performance.now();(function u(t){const k=Math.min(1,(t-s)/1800);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(u)})(s);cio.unobserve(el)}}));
 $$('[data-count]').forEach(el=>cio.observe(el));
-function show(r){if(viewer.open)viewer.close();const pr=r.startsWith('project/');$$('.links a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#/'+(pr?'projects':r)));if(pr)fill(r.slice(8));const id=pr?'project':r;$$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+id));scrollTo(0,0);const h=$('#p-'+id+' .pho h1');if(h){h.classList.remove('in');setTimeout(()=>h.classList.add('in'),80)}}
+function show(r){
+  if(viewer.open)viewer.close();
+  const pr=r.startsWith('project/');
+  $$('.links a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#/'+(pr?'projects':r)));
+  if(pr)fill(r.slice(8));
+  const id=pr?'project':r;
+  $$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+id));
+  if(pr)$$('#p-project .rv').forEach(el=>el.classList.add('in'));
+  scrollTo(0,0);
+  const h=$('#p-'+id+' .pho h1');
+  if(h){h.classList.remove('in');setTimeout(()=>h.classList.add('in'),80)}
+}
 function route(){let r=location.hash.replace('#/','').replace('#','');if(!R.includes(r)&&!(r.startsWith('project/')&&P[r.slice(8)]))r='';if(r===now)return;const first=now===null;now=r;if(first){show(r);return}
  cur.className='cur c';setTimeout(()=>{show(r);cur.className='cur o';setTimeout(()=>{cur.style.transition='none';cur.className='cur';requestAnimationFrame(()=>requestAnimationFrame(()=>cur.style.transition=''))},800)},780)}
 addEventListener('hashchange',route);route();
