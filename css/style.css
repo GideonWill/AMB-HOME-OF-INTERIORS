@@ -16,11 +16,16 @@ a{color:inherit;text-decoration:none}
 .g3{--g:linear-gradient(140deg,#2a1e1e,#7a4b3f 50%,#d8b49a 80%,#3b2a28)}
 .g4{--g:linear-gradient(130deg,#1d1f26,#4a5164 50%,#b9bfd0 85%,#2a2d38)}
 /* preloader */
-#pre{position:fixed;inset:0;background:#f4faf6;color:#0a2616;z-index:99;display:flex;align-items:flex-end;justify-content:space-between;padding:6vw;transition:transform 1s cubic-bezier(.77,0,.18,1)}
+#pre{position:fixed;inset:0;background:#f4faf6;color:#0a2616;z-index:99;display:flex;align-items:flex-end;justify-content:space-between;padding:clamp(1.25rem,5vw,4rem);padding-bottom:calc(clamp(1.25rem,5vw,4rem) + env(safe-area-inset-bottom,0px));transition:transform 1s cubic-bezier(.77,0,.18,1)}
 #pre.done{transform:translateY(-100%)}
-#pre b{font-size:clamp(4rem,16vw,12rem);font-weight:400;line-height:.8}
+.pre-brand{position:absolute;left:50%;top:50%;width:calc(100% - clamp(2.5rem,10vw,8rem));transform:translate(-50%,-50%);color:#00570a;font-family:Arial,Helvetica,sans-serif;font-size:clamp(2rem,6.5vw,6.25rem);font-weight:900;line-height:.92;letter-spacing:-.055em;text-align:center;text-transform:uppercase;text-wrap:balance}
+.pre-loading{display:flex;align-items:flex-end;gap:.45rem;color:#00570a;font-size:clamp(.7rem,1.2vw,.9rem);font-weight:700;letter-spacing:.12em}
+.pre-loading b{font-size:clamp(4rem,16vw,12rem);font-weight:400;line-height:.8;letter-spacing:-.02em}
+.pre-loading span{padding-bottom:.15em}
+#pre .pre-logo{width:clamp(76px,10vw,132px);height:clamp(76px,10vw,132px)}
+@media (max-width:600px){.pre-brand{width:calc(100% - 2rem);font-size:clamp(2.25rem,10vw,3.4rem);line-height:.95}#pre .pre-logo{width:clamp(68px,19vw,88px);height:clamp(68px,19vw,88px)}}
 /* nav */
-nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 4vw;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.72);font-size:12px;letter-spacing:.2em;text-transform:uppercase;transition:padding .35s ease,background-color .35s ease,border-color .35s ease,backdrop-filter .35s ease}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 4vw;color:var(--fg);text-shadow:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;transition:padding .35s ease,background-color .35s ease,border-color .35s ease,backdrop-filter .35s ease}
 nav div{display:flex;gap:2.2rem}
 /* hero */
 .hero{height:100vh;height:100svh;position:relative;display:flex;align-items:flex-end;padding:0 4vw 8vh;color:#f4faf6}
@@ -158,6 +163,8 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 .im10{--img:url("../images/10-grand-hall-chandelier.jpg");--pos:center 55%}
 .im11{--img:url("../images/11-lattice-living-room.jpg");}
 .im12{--img:url("../images/12-marble-floor-living.jpg");}
+.im13{--img:url("../images/13-curved-wood-kitchen.png");}
+.im14{--img:url("../images/14-white-and-charcoal-kitchen.png");}
 
 .lg{display:block;background-image:url("../images/logo.png");background-size:contain;background-repeat:no-repeat;background-position:center}
 
@@ -246,4 +253,5 @@ nav.nav-scrolled{min-height:90px;padding:8px 4vw;background:rgba(255,255,255,.88
 nav.nav-scrolled .links a:last-child:hover{background:#0a2616;color:#fff}
 body:has(nav.nav-scrolled) #logo{top:calc(9px + env(safe-area-inset-top,0px));width:72px;height:72px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.12))}
 @media (max-width:800px){nav.nav-scrolled{min-height:66px;padding:7px 4vw}body:has(nav.nav-scrolled) #logo{top:calc(8px + env(safe-area-inset-top,0px));width:50px;height:50px}}
+@media (max-width:800px){#p-about>.pho{min-height:44vh;min-height:44svh;justify-content:flex-start;padding:calc(100px + env(safe-area-inset-top,0px)) 6vw 4rem}}
 @media (prefers-reduced-motion:reduce){nav{transition:none}}

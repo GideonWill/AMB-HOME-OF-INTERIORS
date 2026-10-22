@@ -3,7 +3,7 @@ AMB HOME OF INTERIORS - website project
 index.html     the site (all pages live here: Home, About, Projects, Archive, Services, Contact, project pages)
 css/style.css  all styling, colours and image links
 js/main.js     all motion and behaviour (menu, page transitions, scrolling gallery, project data)
-images/        your 12 photos + logo.png (your logo, used in the header, loader, menu and footer)
+images/        your 14 project photos + logo.png (your logo, used in the header, loader, menu and footer)
 
 HOW TO VIEW: double-click index.html (works offline).
 HOW TO PUBLISH: upload the whole folder to any host (Netlify, Vercel, GitHub Pages, cPanel). Keep the folder structure.
