@@ -27,16 +27,18 @@ $$('.svc a').forEach(a=>{a.onmouseenter=()=>{if(a.dataset.g)hov.className='ph on
 // router with curtain transition
 const P={skyline:{t:'Skyline Residence',c:'Living Space',k:'living',loc:'East Legon, Accra',y:'2025',a:'780 m\u00b2',i:3,g:[12,7,4,1],d:'A residence composed around a panoramic city view, layered with sculpted seating, a sculptural glass chandelier and a fireplace wall in stone.'},noir:{t:'Noir Dining Room',c:'Dining Room',k:'dining',loc:'Airport Residential, Accra',y:'2025',a:'120 m\u00b2',i:5,g:[1,4,10,2],d:'Charcoal panelling, herringbone walnut and halo lighting create a dining room that feels like an evening in itself.'},halo:{t:'Halo Penthouse',c:'Living Space',k:'living',loc:'Cantonments, Accra',y:'2024',a:'540 m\u00b2',i:8,g:[7,12,2,10],d:'A starlit ceiling, glass staircase and a fireplace set into white stone turn a penthouse lounge into a night-sky retreat.'},atelier:{t:"Chef's Atelier",c:'Kitchen',k:'kitchen',loc:'Labone, Accra',y:'2024',a:'210 m\u00b2',i:6,g:[1,2,12,4],d:'A waterfall marble island, matte black cabinetry and a crystal light bar make this kitchen a stage for entertaining.'},spiral:{t:'Spiral House',c:'Living Space',k:'living',loc:'Trasacco Valley, Accra',y:'2023',a:'960 m\u00b2',i:9,g:[10,12,7,4],d:'A sculpted timber staircase sweeps through a double-height lounge, polished marble floors carrying light through every room.'},kyoto:{t:'Kyoto Suite',c:'Living Space',k:'living',loc:'Osu, Accra',y:'2023',a:'320 m\u00b2',i:11,g:[12,7,2,10],d:'Timber lattice screens, warm cove lighting and a mirror-polished floor bring quiet Japanese restraint to an Accra apartment.'},ember:{t:'Ember Kitchen',c:'Kitchen',k:'kitchen',loc:'Dzorwulu, Accra',y:'2022',a:'—',i:1,g:[6,2],d:'Explore this Dzorwulu kitchen through photographs of considered cabinetry, natural finishes and contemporary kitchen design.'},aura:{t:'Aura Smart Kitchen',c:'Kitchen',k:'kitchen',loc:'Tema, Community 25',y:'2022',a:'—',i:2,g:[6,1],d:'Explore this Tema kitchen through photographs of bright, modern interiors and refined kitchen detailing.'},blossom:{t:'Blossom Dining',c:'Dining Room',k:'dining',loc:'Weija, Accra',y:'2021',a:'—',i:4,g:[5],d:'Explore this Weija dining room through photographs of considered dining spaces, warm lighting and contemporary interiors.'},azure:{t:'Azure Lounge',c:'Living Space',k:'living',loc:'Spintex, Accra',y:'2021',a:'—',i:7,g:[3,8,11],d:'Explore this Spintex lounge through photographs of relaxed living spaces, architectural detail and contemporary interiors.'},foyer:{t:'Grand Foyer',c:'Living Space',k:'living',loc:'Aburi',y:'2020',a:'—',i:10,g:[9,12,3],d:'Explore this Aburi foyer through photographs of elegant interior spaces, sculptural forms and considered material details.'},marble:{t:'Marble Gallery House',c:'Living Space',k:'living',loc:'Adjiringanor',y:'2020',a:'—',i:12,g:[3,7,11],d:'Explore this Adjiringanor residence through photographs of polished surfaces, thoughtful proportions and contemporary living spaces.'}};
 const ids=Object.keys(P);
+const imageFiles={1:'01-dark-kitchen.jpg',2:'02-white-smart-kitchen.jpg',3:'03-living-room-city-view.jpg',4:'04-white-dining-pendants.jpg',5:'05-dark-dining-halo-lights.jpg',6:'06-marble-island-kitchen.jpg',7:'07-modern-living-blue-curtains.jpg',8:'08-starry-ceiling-lounge.jpg',9:'09-spiral-staircase-lounge.jpg',10:'10-grand-hall-chandelier.jpg',11:'11-lattice-living-room.jpg',12:'12-marble-floor-living.jpg'};
+const imagePath=id=>`images/${imageFiles[id]}`;
 const viewer=$('#gallery-viewer'),viewerImage=$('#viewer-image'),viewerTitle=$('#viewer-title'),viewerCount=$('#viewer-count'),viewerCaption=$('#viewer-caption'),viewerThumbs=$('#viewer-thumbs');
 let galleryImages=[],galleryIndex=0,galleryTitle='';
 function renderGallery(){
   const image=galleryImages[galleryIndex];
-  viewerImage.className='ph im'+image;
-  viewerImage.setAttribute('aria-label',`${galleryTitle}, photo ${galleryIndex+1} of ${galleryImages.length}`);
+  viewerImage.src=imagePath(image);
+  viewerImage.alt=`${galleryTitle}, interior photo ${galleryIndex+1} of ${galleryImages.length}`;
   viewerTitle.textContent=galleryTitle;
   viewerCount.textContent=`${String(galleryIndex+1).padStart(2,'0')} / ${String(galleryImages.length).padStart(2,'0')}`;
   viewerCaption.textContent=`${galleryTitle} · Photo ${galleryIndex+1}`;
-  viewerThumbs.innerHTML=galleryImages.map((photo,index)=>`<button class="viewer-thumb${index===galleryIndex?' active':''}" type="button" data-viewer-index="${index}" aria-label="Show photo ${index+1}" aria-pressed="${index===galleryIndex}"><span class="ph im${photo}" aria-hidden="true"></span></button>`).join('');
+  viewerThumbs.innerHTML=galleryImages.map((photo,index)=>`<button class="viewer-thumb${index===galleryIndex?' active':''}" type="button" data-viewer-index="${index}" aria-label="Show photo ${index+1}" aria-pressed="${index===galleryIndex}"><img src="${imagePath(photo)}" alt="" loading="lazy"></button>`).join('');
 }
 function moveGallery(step){galleryIndex=(galleryIndex+step+galleryImages.length)%galleryImages.length;renderGallery()}
 function openGallery(index){
@@ -74,7 +76,7 @@ function fill(id){
   $('#pj-d').textContent=p.d;
   galleryImages=[p.i,...p.g];
   galleryTitle=p.t;
-  $('#pj-g').innerHTML=galleryImages.map((k,index)=>`<button class="gallery-thumb" type="button" data-gallery-index="${index}" aria-label="Open photo ${index+1} of ${galleryImages.length} for ${p.t}"><span class="ph im${k}" aria-hidden="true"></span></button>`).join('');
+  $('#pj-g').innerHTML=galleryImages.map((k,index)=>`<button class="gallery-thumb" type="button" data-gallery-index="${index}" aria-label="Open photo ${index+1} of ${galleryImages.length} for ${p.t}"><img class="gallery-photo" src="${imagePath(k)}" alt="${p.t}, interior photo ${index+1}" loading="${index<2?'eager':'lazy'}"></button>`).join('');
   $('#pj-n').href='#/project/'+ids[n];
   $('#pj-nt').textContent=P[ids[n]].t;
 }
