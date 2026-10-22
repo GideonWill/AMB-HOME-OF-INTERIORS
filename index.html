@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AMB Home of Interiors — Interior Design & Build</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20261022-contact-refresh">
 
 <link rel="icon" href="images/favicon.png">
 </head>
@@ -82,9 +82,45 @@
 </main>
 
 <main class="page" id="p-contact">
-<div class="pho"><div class="label">( Contact )</div><h1 class="serif"><span class="line"><span>Let's build</span></span><span class="line"><span>something rare.</span></span></h1></div>
-<div class="ct"><div class="f rv" id="form"><input id="fn" placeholder="Your name"><input id="fe" placeholder="Phone / WhatsApp number"><select id="fs"><option>Living Space</option><option>Kitchen</option><option>Dining Room</option><option>Full Home Interior</option><option>Other</option></select><textarea id="fm" rows="3" placeholder="Tell us about your project"></textarea><a class="btn" href="#" id="send" style="justify-self:start;margin-top:1rem">Send via WhatsApp</a><p id="ok" class="serif" style="font-size:1.4rem;display:none">Opening WhatsApp — we'll reply shortly.</p></div>
-<div class="info rv"><p><b class="serif">WhatsApp</b><a href="https://wa.me/233599600001" target="_blank" rel="noopener">059 960 0001</a></p><p><b class="serif">Call</b><a href="tel:+233599600001">059 960 0001</a><br><a href="tel:+233241099596">024 109 9596</a><br><a href="tel:+233535548408">053 554 8408</a></p><p><b class="serif">Visit us</b>Weija Topbase, opposite Unction Word Chapel<br>Labone</p><div class="ph im2" style="aspect-ratio:4/5;margin-top:3rem"></div></div></div>
+<header class="contact-intro">
+  <div class="label">( Start a conversation )</div>
+  <h1 class="serif">Tell us about the space you <i>imagine.</i></h1>
+  <p>From the first sketch to the finishing touches, every considered interior starts with a conversation. Share a little about yours and our Accra studio will be in touch.</p>
+</header>
+<div class="contact-layout">
+  <form class="f contact-form rv" id="form">
+    <p class="contact-note">A few details help us make our first conversation count.</p>
+    <div class="contact-fields">
+      <label class="contact-field"><span>Your name <b>*</b></span><input id="fn" name="name" autocomplete="name" placeholder="How should we address you?" required></label>
+      <label class="contact-field"><span>Email address <b>*</b></span><input id="fe" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+      <label class="contact-field"><span>Phone / WhatsApp <small>(optional)</small></span><input id="fp" name="phone" type="tel" autocomplete="tel" placeholder="+233"></label>
+      <label class="contact-field"><span>What are you planning?</span><select id="fs" name="project"><option>Living Space</option><option>Kitchen</option><option>Dining Room</option><option>Full Home Interior</option><option>Office or Commercial Space</option><option>Other</option></select></label>
+      <label class="contact-field"><span>Project location <small>(optional)</small></span><input id="fl" name="location" autocomplete="address-level2" placeholder="City or neighbourhood"></label>
+      <label class="contact-field"><span>Approximate size <small>(optional)</small></span><input id="fa" name="area" inputmode="decimal" placeholder="If you know it"></label>
+      <label class="contact-field contact-field-wide"><span>Your project, in a few words <b>*</b></span><textarea id="fm" name="message" rows="3" placeholder="Tell us what you’re hoping to create." required></textarea></label>
+    </div>
+    <button class="btn contact-submit" id="send" type="submit">Send your enquiry <span aria-hidden="true">↗</span></button>
+    <p id="ok" class="contact-success" role="status" aria-live="polite" hidden>Opening WhatsApp with your project details. We look forward to hearing from you.</p>
+    <p class="contact-privacy">Your details are only used to respond to your enquiry.</p>
+  </form>
+  <aside class="contact-aside rv">
+    <div class="contact-image"><div class="ph im2" role="img" aria-label="A bright, contemporary kitchen interior"></div><span class="contact-image-caption">( A considered space, made for living )</span></div>
+    <div class="contact-details">
+      <div><span class="label">WhatsApp</span><a href="https://wa.me/233599600001" target="_blank" rel="noopener">059 960 0001 <span aria-hidden="true">↗</span></a></div>
+      <div><span class="label">Call the studio</span><a href="tel:+233599600001">059 960 0001</a><a href="tel:+233241099596">024 109 9596</a><a href="tel:+233535548408">053 554 8408</a></div>
+      <div><span class="label">Visit us</span><p>Weija Topbase, opposite Unction Word Chapel<br>Labone, Accra</p></div>
+      <div><span class="label">Studio hours</span><p>Monday – Friday<br>By appointment</p></div>
+    </div>
+  </aside>
+</div>
+<section class="contact-faq">
+  <div><div class="label">( Before we begin )</div><h2 class="serif">A few helpful things.</h2></div>
+  <div class="contact-questions">
+    <details><summary>What kinds of projects do you take on?<span aria-hidden="true">+</span></summary><p>We design and deliver residential interiors, including kitchens, living and dining spaces, and full-home projects, as well as selected office and commercial interiors.</p></details>
+    <details><summary>Where does AMB work?<span aria-hidden="true">+</span></summary><p>Our studio is based in Accra, and we work with clients across Accra and surrounding communities. Share your project location and we can discuss the best way to work together.</p></details>
+    <details><summary>What happens after I send my enquiry?<span aria-hidden="true">+</span></summary><p>We’ll review your project details and contact you to arrange an initial conversation about your space, priorities and next steps.</p></details>
+  </div>
+</section>
 </main>
 
 <main class="page" id="p-project">
@@ -107,6 +143,6 @@
 
 <footer><div><span class="lg" style="width:120px;height:120px;margin-bottom:1rem"></span>Designing interiors, connecting people.</div><div><a href="https://wa.me/233599600001" target="_blank" rel="noopener">WhatsApp: 059 960 0001</a><br>Call: <a href="tel:+233599600001">059 960 0001</a><br><a href="tel:+233241099596">024 109 9596</a><br><a href="tel:+233535548408">053 554 8408</a></div><div>Weija Topbase,<br>opposite Unction Word Chapel<br>Labone</div><div>© 2026 AMB Home of Interiors</div></footer>
 
-<script src="js/main.js?v=20261022-gallery-fix"></script>
+<script src="js/main.js?v=20261022-contact-refresh"></script>
 </body>
 </html>

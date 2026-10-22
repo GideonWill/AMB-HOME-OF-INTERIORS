@@ -85,6 +85,7 @@ function show(r){
   const id=pr?'project':r;
   $$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+id));
   if(pr)$$('#p-project .rv').forEach(el=>el.classList.add('in'));
+  if(id==='contact')$$('#p-contact .rv').forEach(el=>el.classList.add('in'));
   scrollTo(0,0);
   const h=$('#p-'+id+' .pho h1');
   if(h){h.classList.remove('in');setTimeout(()=>h.classList.add('in'),80)}
@@ -93,5 +94,24 @@ function route(){let r=location.hash.replace('#/','').replace('#','');if(!R.incl
  cur.className='cur c';setTimeout(()=>{show(r);cur.className='cur o';setTimeout(()=>{cur.style.transition='none';cur.className='cur';requestAnimationFrame(()=>requestAnimationFrame(()=>cur.style.transition=''))},800)},780)}
 addEventListener('hashchange',route);route();
 $$('.chips button').forEach(b=>b.onclick=()=>{$$('.chips button').forEach(x=>x.classList.toggle('on',x===b));$$('.it').forEach(i=>i.classList.toggle('h',b.dataset.f!=='all'&&i.dataset.c!==b.dataset.f))});
-$('#send').onclick=function(){const t=`Hello AMB Home of Interiors, my name is ${$('#fn').value||'-'}. Phone: ${$('#fe').value||'-'}. Project: ${$('#fs').value}. ${$('#fm').value}`;this.href='https://wa.me/233599600001?text='+encodeURIComponent(t);this.target='_blank';this.rel='noopener';$('#ok').style.display='block'};
+$('#form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const form=e.currentTarget;
+  if(!form.reportValidity())return;
+  const details=[
+    'Hello AMB Home of Interiors, I would like to discuss a project.',
+    `Name: ${$('#fn').value.trim()}`,
+    `Email: ${$('#fe').value.trim()}`,
+    `Phone / WhatsApp: ${$('#fp').value.trim()||'Not provided'}`,
+    `Project type: ${$('#fs').value}`,
+    `Location: ${$('#fl').value.trim()||'Not provided'}`,
+    `Approximate size: ${$('#fa').value.trim()||'Not provided'}`,
+    `Project details: ${$('#fm').value.trim()}`
+  ];
+  const url=`https://wa.me/233599600001?text=${encodeURIComponent(details.join('\n'))}`;
+  $('#ok').hidden=false;
+  const whatsapp=window.open(url,'_blank');
+  if(whatsapp)whatsapp.opener=null;
+  else location.href=url;
+});
 $$('.card,.it').forEach(a=>{const g=a.classList.contains('card')?$$('.card'):$$('.it');a.href='#/project/'+ids[g.indexOf(a)]});
