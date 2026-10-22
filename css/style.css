@@ -242,6 +242,8 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 @media (max-width:800px){#p-contact{--contact-gutter:6vw}.contact-intro{padding-top:11rem}.contact-layout,.contact-faq{grid-template-columns:1fr;gap:4rem}.contact-fields{column-gap:1.2rem}.contact-details{padding-top:2rem}}
 @media (max-width:520px){.contact-fields{grid-template-columns:1fr}.contact-field-wide{grid-column:auto}.contact-intro h1{font-size:clamp(2.8rem,13vw,4.5rem)}.contact-details{grid-template-columns:1fr 1fr}}
 
-nav.nav-scrolled{padding:14px 4vw;background:rgba(4,24,12,.84);color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.45);mix-blend-mode:normal;border-bottom:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
-@media (max-width:800px){nav.nav-scrolled{padding:12px 4vw}}
+nav.nav-scrolled{min-height:90px;padding:8px 4vw;background:rgba(255,255,255,.88);color:#0a2616;text-shadow:none;mix-blend-mode:normal;border-bottom:1px solid rgba(10,38,22,.12);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+nav.nav-scrolled .links a:last-child:hover{background:#0a2616;color:#fff}
+body:has(nav.nav-scrolled) #logo{top:calc(9px + env(safe-area-inset-top,0px));width:72px;height:72px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.12))}
+@media (max-width:800px){nav.nav-scrolled{min-height:66px;padding:7px 4vw}body:has(nav.nav-scrolled) #logo{top:calc(8px + env(safe-area-inset-top,0px));width:50px;height:50px}}
 @media (prefers-reduced-motion:reduce){nav{transition:none}}
