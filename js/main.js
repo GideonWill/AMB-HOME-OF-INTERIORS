@@ -1,5 +1,9 @@
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const nav=$('nav');
+function updateNav(){nav.classList.toggle('nav-scrolled',scrollY>24)}
+addEventListener('scroll',updateNav,{passive:true});
+updateNav();
 
 // preloader
 let n=0;const cnt=$('#cnt'),t=setInterval(()=>{n+=Math.ceil(Math.random()*9);if(n>=100){n=100;clearInterval(t);setTimeout(()=>{$('#pre').classList.add('done');$('#h1').classList.add('in')},300)}cnt.textContent=n},60);
