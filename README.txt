@@ -11,6 +11,7 @@ HOW TO PUBLISH: upload the whole folder to any host (Netlify, Vercel, GitHub Pag
 HOW TO EDIT
 - Phone / WhatsApp numbers and address: search index.html for "0599600001" style links (tel: and wa.me/233...) and "Weija Topbase". The contact form sends its message to WhatsApp (js/main.js, search "wa.me").
 - Project names, places, descriptions, which photos each project uses: js/main.js, the "const P" block. On each project page, select the cover or any gallery photo to open the interactive viewer; use the arrows, thumbnails, or keyboard arrow keys to browse.
+- Every archive entry opens its matching project page and image gallery. Current supplied photos are 736–1199 pixels on their longest side; true 8K detail requires higher-resolution original photos.
 - Add a photo: put it in images/, then add a line to css/style.css like  .im13{--img:url("../images/your-photo.jpg")}
   and use class "im13" on any element with class "ph".
 - Colours: top of css/style.css (--bg, --fg, --acc).
