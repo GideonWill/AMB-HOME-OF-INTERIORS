@@ -1,22 +1,37 @@
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const nav=$('nav');
-function updateNav(){nav.classList.toggle('nav-scrolled',scrollY>24)}
+function updateNav(){
+  const isHome = $('#p-') && $('#p-').classList.contains('on');
+  let scrolled = scrollY > 24;
+  if (isHome) {
+    const heroPin = document.getElementById('hero-pin');
+    if (heroPin) {
+      const rect = heroPin.getBoundingClientRect();
+      scrolled = rect.bottom <= 80;
+    }
+  }
+  nav.classList.toggle('nav-scrolled', scrolled);
+}
 addEventListener('scroll',updateNav,{passive:true});
 updateNav();
 
+
 // preloader
-let n=0;const cnt=$('#cnt'),t=setInterval(()=>{n+=Math.ceil(Math.random()*9);if(n>=100){n=100;clearInterval(t);setTimeout(()=>{$('#pre').classList.add('done');$('#h1').classList.add('in')},300)}cnt.textContent=n},60);
+let n=0;const cnt=$('#cnt'),t=setInterval(()=>{n+=Math.ceil(Math.random()*9);if(n>=100){n=100;clearInterval(t);setTimeout(()=>{$('#pre').classList.add('done');const h1=$('#h1');if(h1)h1.classList.add('in')},300)}cnt.textContent=n},60);
+
 // reveal on scroll
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
 $$('.rv').forEach(el=>io.observe(el));
-// scroll-linked: parallax + pinned horizontal track
-const track=$('#track'),pin=$('#work'),prog=$('#prog'),par=$$('[data-par]'),hero=$('#heroimg');
+// scroll-linked: parallax + pinned horizontal track + hero pin
+const track=$('#track'),pin=$('#work'),prog=$('#prog'),par=$$('[data-par]');
+let updateHeroScroll = () => {};
 function tick(){
   const y=scrollY,vh=innerHeight;
+  updateHeroScroll();
+  updateNav();
   par.forEach(el=>{const r=el.getBoundingClientRect();el.style.transform=`translateY(${(r.top-vh/2)*-el.dataset.par}px)`});
-  const r=pin.getBoundingClientRect(),max=pin.offsetHeight-vh,p=Math.min(1,Math.max(0,-r.top/max));
-  track.style.transform=`translateX(${-p*(track.scrollWidth-innerWidth)}px)`;prog.style.width=p*100+'%';
+  if(pin&&track&&prog){const r=pin.getBoundingClientRect(),max=pin.offsetHeight-vh,p=Math.min(1,Math.max(0,-r.top/max));track.style.transform=`translateX(${-p*(track.scrollWidth-innerWidth)}px)`;prog.style.width=p*100+'%'}
   requestAnimationFrame(tick)}
 tick();
 // service hover image follows cursor
@@ -27,7 +42,7 @@ $$('.svc a').forEach(a=>{a.onmouseenter=()=>{if(a.dataset.g)hov.className='ph on
 // router with curtain transition
 const P={skyline:{t:'Skyline Residence',c:'Living Space',k:'living',loc:'East Legon, Accra',y:'2025',a:'780 m\u00b2',i:3,g:[12,7,4,1],d:'A residence composed around a panoramic city view, layered with sculpted seating, a sculptural glass chandelier and a fireplace wall in stone.'},noir:{t:'Noir Dining Room',c:'Dining Room',k:'dining',loc:'Airport Residential, Accra',y:'2025',a:'120 m\u00b2',i:5,g:[1,4,10,2],d:'Charcoal panelling, herringbone walnut and halo lighting create a dining room that feels like an evening in itself.'},halo:{t:'Halo Penthouse',c:'Living Space',k:'living',loc:'Cantonments, Accra',y:'2024',a:'540 m\u00b2',i:8,g:[7,12,2,10],d:'A starlit ceiling, glass staircase and a fireplace set into white stone turn a penthouse lounge into a night-sky retreat.'},atelier:{t:"Chef's Atelier",c:'Kitchen',k:'kitchen',loc:'Labone, Accra',y:'2024',a:'210 m\u00b2',i:6,g:[1,2,12,4,14],d:'A waterfall marble island, matte black cabinetry and a crystal light bar make this kitchen a stage for entertaining.'},spiral:{t:'Spiral House',c:'Living Space',k:'living',loc:'Trasacco Valley, Accra',y:'2023',a:'960 m\u00b2',i:9,g:[10,12,7,4],d:'A sculpted timber staircase sweeps through a double-height lounge, polished marble floors carrying light through every room.'},kyoto:{t:'Kyoto Suite',c:'Living Space',k:'living',loc:'Osu, Accra',y:'2023',a:'320 m\u00b2',i:11,g:[12,7,2,10],d:'Timber lattice screens, warm cove lighting and a mirror-polished floor bring quiet Japanese restraint to an Accra apartment.'},ember:{t:'Ember Kitchen',c:'Kitchen',k:'kitchen',loc:'Dzorwulu, Accra',y:'2022',a:'—',i:1,g:[6,2,14],d:'Explore this Dzorwulu kitchen through photographs of considered cabinetry, natural finishes and contemporary kitchen design.'},aura:{t:'Aura Smart Kitchen',c:'Kitchen',k:'kitchen',loc:'Tema, Community 25',y:'2022',a:'—',i:2,g:[6,1,14],d:'Explore this Tema kitchen through photographs of bright, modern interiors and refined kitchen detailing.'},blossom:{t:'Blossom Dining',c:'Dining Room',k:'dining',loc:'Weija, Accra',y:'2021',a:'—',i:4,g:[5],d:'Explore this Weija dining room through photographs of considered dining spaces, warm lighting and contemporary interiors.'},azure:{t:'Azure Lounge',c:'Living Space',k:'living',loc:'Spintex, Accra',y:'2021',a:'—',i:7,g:[3,8,11],d:'Explore this Spintex lounge through photographs of relaxed living spaces, architectural detail and contemporary interiors.'},foyer:{t:'Grand Foyer',c:'Living Space',k:'living',loc:'Aburi',y:'2020',a:'—',i:10,g:[9,12,3],d:'Explore this Aburi foyer through photographs of elegant interior spaces, sculptural forms and considered material details.'},marble:{t:'Marble Gallery House',c:'Living Space',k:'living',loc:'Adjiringanor',y:'2020',a:'—',i:12,g:[3,7,11],d:'Explore this Adjiringanor residence through photographs of polished surfaces, thoughtful proportions and contemporary living spaces.'}};
 const ids=Object.keys(P);
-const imageFiles={1:'01-dark-kitchen.jpg',2:'02-white-smart-kitchen.jpg',3:'03-living-room-city-view.jpg',4:'04-white-dining-pendants.jpg',5:'05-dark-dining-halo-lights.jpg',6:'06-marble-island-kitchen.jpg',7:'07-modern-living-blue-curtains.jpg',8:'08-starry-ceiling-lounge.jpg',9:'09-spiral-staircase-lounge.jpg',10:'10-grand-hall-chandelier.jpg',11:'11-lattice-living-room.jpg',12:'12-marble-floor-living.jpg',14:'14-white-and-charcoal-kitchen.png'};
+const imageFiles={1:'01-dark-kitchen.jpg',2:'02-white-smart-kitchen.jpg',3:'living%20room%201.jpeg',4:'04-white-dining-pendants.jpg',5:'05-dark-dining-halo-lights.jpg',6:'06-marble-island-kitchen.jpg',7:'07-modern-living-blue-curtains.jpg',8:'interior%201.jpeg',9:'living%20room%202.jpeg',10:'10-grand-hall-chandelier.jpg',11:'11-lattice-living-room.jpg',12:'12-marble-floor-living.jpg',14:'14-white-and-charcoal-kitchen.png'};
 const imagePath=id=>`images/${imageFiles[id]}`;
 const viewer=$('#gallery-viewer'),viewerImage=$('#viewer-image'),viewerTitle=$('#viewer-title'),viewerCount=$('#viewer-count'),viewerCaption=$('#viewer-caption'),viewerThumbs=$('#viewer-thumbs');
 let galleryImages=[],galleryIndex=0,galleryTitle='';
@@ -56,8 +71,111 @@ viewer.addEventListener('click',e=>{if(e.target===viewer)viewer.close()});
 $('#track').innerHTML=ids.slice(0,4).map(id=>`<a class="card" href="#/project/${id}"><div class="ph im${P[id].i}"></div><small>${P[id].c} \u00b7 ${P[id].y}</small><h3 class="serif">${P[id].t}</h3></a>`).join('');
 $('.grid').innerHTML=ids.map(id=>`<a class="it rv" data-c="${P[id].k}" href="#/project/${id}"><div class="w"><div class="ph im${P[id].i}"></div></div><small>${P[id].c} \u00b7 ${P[id].y}</small><h3 class="serif">${P[id].t}</h3></a>`).join('');
 $$('.grid .it').forEach(e=>io.observe(e));
-$('#idx').innerHTML=ids.slice(0,6).map((id,k)=>`<a href="#/project/${id}" data-i="${P[id].i}"><span>0${k+1}</span><b>${P[id].t}</b><em>${P[id].c}</em></a>`).join('');
-const h2=$('#heroimg2');$$('#idx a').forEach(a=>{a.onmouseenter=()=>{h2.className='ph on im'+a.dataset.i};a.onmouseleave=()=>h2.classList.remove('on')});
+// ── Senawa-style Pinned Hero Controller ────────────────────────
+const heroPin = document.getElementById('hero-pin');
+const heroTrack = document.getElementById('hero-track');
+const heroStrip = document.getElementById('hero-strip');
+const heroBarProg = document.getElementById('hero-bar-prog');
+
+const heroProjectKeys = ['skyline', 'noir', 'halo', 'atelier', 'spiral', 'kyoto'];
+const heroProjects = heroProjectKeys.map(k => ({ id: k, ...P[k], imgSrc: imagePath(P[k].i) }));
+
+if (heroTrack && heroStrip) {
+  // Render hero slides
+  heroTrack.innerHTML = heroProjects.map((p, idx) => `
+    <div class="hero-slide${idx === 0 ? ' active' : ''}" data-hero-index="${idx}">
+      <img class="hero-slide-img" src="${p.imgSrc}" alt="${p.t}" loading="${idx < 2 ? 'eager' : 'lazy'}">
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-card">
+        <span class="hero-slide-tag">${p.y} &nbsp;·&nbsp; ${p.c} &nbsp;·&nbsp; ${p.loc}</span>
+        <h2 class="hero-slide-name">${p.t}</h2>
+        <a class="hero-slide-cta" href="#/project/${p.id}">View Project <span>→</span></a>
+      </div>
+    </div>
+  `).join('');
+
+  // Render hero bottom strip (Senawa-style selector)
+  heroStrip.innerHTML = heroProjects.map((p, idx) => `
+    <button class="hero-item${idx === 0 ? ' active' : ''}" type="button" data-hero-index="${idx}" aria-label="Explore ${p.t}">
+      <span class="hero-item-t">${p.t}</span>
+      <span class="hero-item-m">${p.y} &nbsp;|&nbsp; ${p.c}</span>
+    </button>
+  `).join('');
+
+  // Clicking an item in the strip
+  heroStrip.addEventListener('click', e => {
+    const btn = e.target.closest('[data-hero-index]');
+    if (!btn) return;
+    const targetIdx = Number(btn.dataset.heroIndex);
+    const maxScroll = heroPin.offsetHeight - window.innerHeight;
+    const targetY = heroPin.offsetTop + (targetIdx / (heroProjects.length - 1)) * maxScroll;
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
+  });
+
+  // Position progress bar indicator
+  function syncHeroBar(idx) {
+    const btns = heroStrip.children;
+    if (btns[idx] && heroBarProg) {
+      const b = btns[idx];
+      heroBarProg.style.width = b.offsetWidth + 'px';
+      heroBarProg.style.transform = `translateX(${b.offsetLeft}px)`;
+    }
+  }
+
+  setTimeout(() => syncHeroBar(0), 120);
+  window.addEventListener('resize', () => {
+    const curActive = heroStrip.querySelector('.hero-item.active');
+    if (curActive) syncHeroBar(Number(curActive.dataset.heroIndex));
+  }, { passive: true });
+
+  let lastHeroIdx = -1;
+  updateHeroScroll = function() {
+    if (!heroPin) return;
+    const homePage = document.getElementById('p-');
+    if (homePage && !homePage.classList.contains('on')) return;
+
+    const rect = heroPin.getBoundingClientRect();
+    const maxScroll = heroPin.offsetHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+
+    const p = Math.min(1, Math.max(0, -rect.top / maxScroll));
+    const N = heroProjects.length;
+    const floatIdx = p * (N - 1);
+    const activeIdx = Math.min(N - 1, Math.max(0, Math.round(floatIdx)));
+
+    const slides = heroTrack.children;
+    for (let i = 0; i < N; i++) {
+      const dist = floatIdx - i;
+      const absDist = Math.abs(dist);
+      const slide = slides[i];
+      if (!slide) continue;
+
+      if (absDist < 1.0) {
+        const op = Math.max(0, 1 - absDist);
+        slide.style.opacity = op.toFixed(3);
+        slide.style.pointerEvents = absDist < 0.45 ? 'auto' : 'none';
+      } else {
+        slide.style.opacity = '0';
+        slide.style.pointerEvents = 'none';
+      }
+      slide.classList.toggle('active', i === activeIdx);
+    }
+
+    const stripBtns = heroStrip.children;
+    if (activeIdx !== lastHeroIdx) {
+      lastHeroIdx = activeIdx;
+      for (let i = 0; i < N; i++) {
+        if (stripBtns[i]) stripBtns[i].classList.toggle('active', i === activeIdx);
+      }
+      syncHeroBar(activeIdx);
+      if (stripBtns[activeIdx] && window.innerWidth < 800) {
+        const btn = stripBtns[activeIdx];
+        const targetLeft = btn.offsetLeft - (heroStrip.clientWidth - btn.offsetWidth) / 2;
+        heroStrip.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+      }
+    }
+  };
+}
 const AR=ids.map(id=>({id,t:P[id].t,ty:P[id].c,loc:P[id].loc,y:P[id].y,i:P[id].i})).sort((a,b)=>b.y-a.y);
 $('#arch').innerHTML=AR.map(r=>`<a href="#/project/${r.id}" class="row" data-i="${r.i}"><span>${r.y}</span><b>${r.t}</b><span>${r.ty}</span><span>${r.loc}</span><span>\u2197</span></a>`).join('');
 $$('.arch .row').forEach(a=>{a.onmouseenter=()=>{hov.className='ph on im'+a.dataset.i};a.onmouseleave=()=>hov.classList.remove('on')});

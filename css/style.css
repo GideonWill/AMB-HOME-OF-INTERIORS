@@ -27,18 +27,265 @@ a{color:inherit;text-decoration:none}
 /* nav */
 nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 4vw;color:var(--fg);text-shadow:none;font-size:12px;letter-spacing:.2em;text-transform:uppercase;transition:padding .35s ease,background-color .35s ease,border-color .35s ease,backdrop-filter .35s ease}
 nav div{display:flex;gap:2.2rem}
-/* hero */
-.hero{height:100vh;height:100svh;position:relative;display:flex;align-items:flex-end;padding:0 4vw 8vh;color:#f4faf6}
-.hero .ph{position:absolute;inset:-2%;animation:zoom 28s ease-in-out infinite alternate;filter:contrast(1.06) saturate(1.04)}
-.hero .ph::before{content:"";position:absolute;inset:0;z-index:1;background:repeating-linear-gradient(90deg,transparent 0 22%,rgba(0,0,0,.18) 22% 22.4%)}
-@keyframes zoom{to{transform:scale(1.045) translate(-.35%,.25%)}}
-.hero h1{position:relative;z-index:2;font-size:clamp(2.6rem,9vw,8.5rem);line-height:.95}
-.line{display:block;overflow:hidden}.line>span{display:block;transform:translateY(110%);transition:transform 1.2s cubic-bezier(.19,1,.22,1)}
-.in .line>span,.line.in>span{transform:none}
-.line:nth-child(2)>span{transition-delay:.12s}.line:nth-child(3)>span{transition-delay:.24s}
-.scroll{position:absolute;right:4vw;bottom:8vh;z-index:2;font-size:11px;letter-spacing:.25em;writing-mode:vertical-rl}
-.scroll::after{content:"";display:block;width:1px;height:60px;margin:12px auto 0;background:currentColor;animation:drop 2s infinite}
-@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* ── Senawa-style pinned hero ────────────────────────────────── */
+.hero-pin{
+  position:relative;
+  height:440vh;
+  width:100%;
+}
+.hero{
+  position:sticky;
+  top:0;left:0;
+  width:100%;
+  height:100vh;
+  height:100svh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:#07130b;
+  color:#fff;
+}
+.hero-track{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+.hero-slide{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .35s ease-out;
+  will-change:opacity;
+}
+.hero-slide.active{
+  opacity:1;
+}
+.hero-slide-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  image-rendering:-webkit-optimize-contrast;
+  filter:contrast(1.02) saturate(1.02);
+}
+.hero-slide-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(6,18,11,.55) 0%,rgba(6,18,11,.08) 25%,rgba(6,18,11,.22) 55%,rgba(6,18,11,.88) 100%);
+  pointer-events:none;
+}
+.hero-slide-card{
+  position:absolute;
+  bottom:115px;
+  left:4vw;
+  z-index:5;
+  max-width:min(580px,86vw);
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .5s cubic-bezier(.19,1,.22,1),transform .5s cubic-bezier(.19,1,.22,1);
+  pointer-events:none;
+}
+.hero-slide.active .hero-slide-card{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.hero-slide-tag{
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.76);
+  margin-bottom:8px;
+  display:block;
+}
+.hero-slide-name{
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:clamp(2rem,4.4vw,4rem);
+  font-weight:400;
+  line-height:1.04;
+  color:#fff;
+  margin-bottom:12px;
+  letter-spacing:-.02em;
+}
+.hero-slide-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.45);
+  padding-bottom:3px;
+  transition:border-color .3s,gap .3s;
+}
+.hero-slide-cta:hover{
+  border-color:#fff;
+  gap:12px;
+  color:var(--acc);
+}
+
+/* bottom strip & progress bar */
+.hero-foot{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  z-index:15;
+  padding:0 4vw 22px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  pointer-events:auto;
+  background:linear-gradient(0deg,rgba(6,18,11,.92) 0%,rgba(6,18,11,.45) 70%,transparent 100%);
+}
+.hero-strip{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:clamp(16px,2.8vw,42px);
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:2px;
+}
+.hero-strip::-webkit-scrollbar{display:none}
+.hero-item{
+  background:transparent;
+  border:none;
+  padding:8px 6px;
+  margin:0;
+  cursor:pointer;
+  text-align:left;
+  color:#fff;
+  font-family:inherit;
+  opacity:.42;
+  transition:opacity .3s ease,transform .3s ease;
+  border-radius:4px;
+  white-space:nowrap;
+  outline:none;
+  flex-shrink:0;
+}
+.hero-item:hover{
+  opacity:.85;
+}
+.hero-item.active{
+  opacity:1;
+  transform:translateY(-2px);
+}
+.hero-item-t{
+  display:block;
+  font-size:clamp(13px,1.2vw,16px);
+  font-weight:600;
+  letter-spacing:.02em;
+  color:#ffffff;
+  margin-bottom:3px;
+}
+.hero-item-m{
+  display:block;
+  font-size:clamp(9px,.82vw,10.5px);
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+}
+.hero-bar{
+  position:relative;
+  width:100%;
+  height:2px;
+  background:rgba(255,255,255,.2);
+  border-radius:2px;
+}
+#hero-bar-prog{
+  position:absolute;
+  top:0;left:0;
+  height:100%;
+  width:0;
+  background:#ffffff;
+  border-radius:2px;
+  transition:transform .12s cubic-bezier(.2,0,0,1),width .2s ease;
+  will-change:transform,width;
+  box-shadow:0 0 10px rgba(255,255,255,.8);
+}
+
+/* right side vertical badge & scroll hint */
+.hero-badge{
+  position:absolute;
+  right:0;top:50%;
+  transform:translateY(-50%);
+  z-index:12;
+  background:#06140c;
+  color:#f4faf6;
+  border:1px solid rgba(255,255,255,.15);
+  border-right:none;
+  padding:18px 8px;
+  display:flex;
+  align-items:center;
+  writing-mode:vertical-rl;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  border-top-left-radius:6px;
+  border-bottom-left-radius:6px;
+  box-shadow:-2px 0 16px rgba(0,0,0,.4);
+  pointer-events:none;
+}
+.scroll{
+  position:absolute;
+  right:4vw;
+  bottom:92px;
+  z-index:12;
+  font-size:10px;
+  letter-spacing:.25em;
+  writing-mode:vertical-rl;
+  color:rgba(255,255,255,.8);
+}
+.scroll::after{
+  content:"";
+  display:block;
+  width:1px;
+  height:50px;
+  margin:10px auto 0;
+  background:currentColor;
+  animation:drop 2s infinite;
+}
+@keyframes drop{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* top nav over hero */
+body:has(#p-.on) nav:not(.nav-scrolled){
+  color:#ffffff;
+}
+body:has(#p-.on) nav:not(.nav-scrolled) #mbtn span{
+  background:#ffffff;
+}
+
+@media (max-width:900px){
+  .hero-pin{height:360vh}
+  .hero-strip{justify-content:flex-start;gap:18px}
+  .hero-slide-card{bottom:100px}
+  .hero-slide-name{font-size:clamp(1.7rem,7vw,2.4rem)}
+  .hero-foot{padding:0 4vw 16px;gap:10px}
+  .hero-badge{display:none!important}
+  .scroll{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-slide,.hero-slide-img,.hero-item,#hero-bar-prog{transition:none!important}
+}
+
 /* sections */
 section{padding:16vh 4vw}
 .label{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--mut);margin-bottom:2rem}
@@ -153,13 +400,13 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 .hero .ph::after,.prh>.ph::after{background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.08) 40%,rgba(0,0,0,.68))}
 .im1{--img:url("../images/01-dark-kitchen.jpg");--pos:center 55%}
 .im2{--img:url("../images/02-white-smart-kitchen.jpg");}
-.im3{--img:url("../images/03-living-room-city-view.jpg");}
+.im3{--img:url("../images/living%20room%201.jpeg");}
 .im4{--img:url("../images/04-white-dining-pendants.jpg");--pos:center 60%}
 .im5{--img:url("../images/05-dark-dining-halo-lights.jpg");}
 .im6{--img:url("../images/06-marble-island-kitchen.jpg");}
 .im7{--img:url("../images/07-modern-living-blue-curtains.jpg");--pos:center 55%}
-.im8{--img:url("../images/08-starry-ceiling-lounge.jpg");--pos:center 40%}
-.im9{--img:url("../images/09-spiral-staircase-lounge.jpg");--pos:center 40%}
+.im8{--img:url("../images/interior%201.jpeg");--pos:center 40%}
+.im9{--img:url("../images/living%20room%202.jpeg");--pos:center 40%}
 .im10{--img:url("../images/10-grand-hall-chandelier.jpg");--pos:center 55%}
 .im11{--img:url("../images/11-lattice-living-room.jpg");}
 .im12{--img:url("../images/12-marble-floor-living.jpg");}
