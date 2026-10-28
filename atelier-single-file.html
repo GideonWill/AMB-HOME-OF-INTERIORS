@@ -56,7 +56,7 @@ nav div{display:flex;gap:2.2rem}
 .hero .ph::before{content:"";position:absolute;inset:0;z-index:1;background:repeating-linear-gradient(90deg,transparent 0 22%,rgba(0,0,0,.18) 22% 22.4%)}
 @keyframes zoom{to{transform:scale(1.12) translate(-1.5%,1%)}}
 .hero h1{position:relative;z-index:2;font-size:clamp(2.6rem,9vw,8.5rem);line-height:.95}
-.line{display:block;overflow:hidden}.line>span{display:block;transform:translateY(110%);transition:transform 1.2s cubic-bezier(.19,1,.22,1)}
+.line{display:inline-block;overflow:hidden;vertical-align:bottom;margin-right:.24em}.line:last-child{margin-right:0}.line>span{display:inline-block;transform:translateY(110%);transition:transform 1.2s cubic-bezier(.19,1,.22,1)}
 .in .line>span,.line.in>span{transform:none}
 .line:nth-child(2)>span{transition-delay:.12s}.line:nth-child(3)>span{transition-delay:.24s}
 .scroll{position:absolute;right:4vw;bottom:8vh;z-index:2;font-size:11px;letter-spacing:.25em;writing-mode:vertical-rl}
@@ -611,22 +611,47 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 }
 
 @media (max-width:900px){
-  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.2rem}
   .footer-brand-col{grid-column:span 2;padding-right:0}
   .footer-headline{font-size:clamp(2rem,7vw,3.4rem);max-width:100%}
   .footer-hero-wrap{gap:2rem}
 }
-@media (max-width:600px){
-  .footer-grid{grid-template-columns:1fr;gap:2.2rem}
-  .footer-brand-col{grid-column:auto}
-  .footer-utility-bar{flex-direction:column;align-items:flex-start;gap:1rem}
-  .footer-giant-mark{padding-bottom:1.5rem}
 
-/* On mobile, show the footer logo deep and solid without any fading */
 @media (max-width:768px){
+  .site-footer{
+    overflow:hidden;
+  }
+  .footer-inner{
+    padding:clamp(2rem,4.5vw,2.8rem) 4vw 1rem;
+  }
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:1.8rem 1.4rem;
+  }
+  .footer-brand-col{
+    grid-column:span 2;
+    padding-right:0;
+  }
+  .footer-col:last-child{
+    grid-column:span 2;
+  }
+  .footer-utility-bar{
+    margin-top:1.8rem;
+    padding-top:1.2rem;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.75rem;
+  }
   .footer-giant-mark{
+    position:relative;
+    overflow:hidden;
     opacity:1 !important;
     transform:none !important;
+    margin:0 !important;
+    padding:0.4rem 4vw 1.2rem !important;
+  }
+  .footer-giant-svg{
+    max-height:clamp(60px,16vw,120px);
   }
   #giant-mark stop,
   #giant-fade stop,
@@ -643,10 +668,43 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
     opacity:1 !important;
   }
 }
+
+@media (max-width:480px){
+  .footer-inner{
+    padding:1.8rem 4vw .8rem;
+  }
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem 1rem;
+  }
+  .footer-col-title{
+    margin-bottom:.8rem;
+  }
+  .footer-nav-list{
+    font-size:.88rem;
+    gap:.5rem;
+  }
+  .footer-brand-desc{
+    font-size:.85rem;
+    line-height:1.6;
+  }
+  .footer-utility-bar{
+    margin-top:1.4rem;
+    padding-top:1rem;
+  }
+  .footer-giant-mark{
+    padding:0.2rem 4vw 1rem !important;
+  }
+  .footer-giant-svg{
+    max-height:clamp(50px,14vw,80px);
+  }
+}
+
 :root[data-theme="dark"] .footer-giant-svg path,
 :root[data-theme="dark"] .footer-giant-svg text{
   fill:#ffffff !important;
 }
+
 @media (max-width:768px) and (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) #giant-mark stop,
   :root:not([data-theme="light"]) #giant-fade stop,
@@ -662,8 +720,6 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
     fill:#ffffff !important;
     opacity:1 !important;
   }
-}
-
 }
 @media (prefers-reduced-motion:reduce){
   .footer-giant-mark{
@@ -752,7 +808,7 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 </main>
 
 <main class="page" id="p-about">
-<div class="pho"><div class="label">( About )</div><h1 class="serif"><span class="line"><span>Design is how</span></span><span class="line"><span>we think.</span></span></h1></div>
+<div class="pho"><div class="label">( About )</div><h1 class="serif"><span class="line"><span>Design is how </span></span> <span class="line"><span>we think.</span></span></h1></div>
 <div class="band"><div class="ph im3" data-par="0.18"></div></div>
 <section class="about"><div class="rv"><div class="label">( Philosophy )</div><h2 class="serif">Quiet luxury, built with precision.</h2><p>We believe a great interior is felt before it is seen. Every project begins with listening, then proportion, light and material — resolved in our own workshop and on site by one accountable team.</p></div><div class="ph im4 rv" style="aspect-ratio:4/5"></div></section>
 <section><div class="stats"><div><b class="serif" data-count="3">0</b><span>Years in service</span></div><div><b class="serif" data-count="300" data-suffix="+">0</b><span>Over 300 spaces</span></div><div><b class="serif" data-count="8" data-suffix="+">0</b><span>Landmark clientele</span></div></div></section>
@@ -761,12 +817,12 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 </main>
 
 <main class="page" id="p-projects">
-<div class="pho"><div class="label">( Projects )</div><h1 class="serif"><span class="line"><span>Selected</span></span><span class="line"><span>work.</span></span></h1></div>
+<div class="pho"><div class="label">( Projects )</div><h1 class="serif"><span class="line"><span>Selected </span></span> <span class="line"><span>work.</span></span></h1></div>
 <div class="chips"><button class="on" data-f="all">All</button><button data-f="living">Living</button><button data-f="kitchen">Kitchens</button><button data-f="dining">Dining</button></div>
 <div class="grid"></div></main>
 
 <main class="page" id="p-services">
-<div class="pho"><div class="label">( Services )</div><h1 class="serif"><span class="line"><span>Design</span></span><span class="line"><span>meets purpose.</span></span></h1></div>
+<div class="pho"><div class="label">( Services )</div><h1 class="serif"><span class="line"><span>Design </span></span> <span class="line"><span>meets purpose.</span></span></h1></div>
 <div class="sv"><div class="ph im12 rv"></div><div class="rv"><h2 class="serif">Interior Design</h2><p>Concept-to-detail design that balances atmosphere, function and timeless materials.</p><ul><li>Space planning</li><li>Material &amp; colour curation</li><li>3D visualisation</li></ul></div></div>
 <div class="sv"><div class="ph im9 rv"></div><div class="rv"><h2 class="serif">Design &amp; Build</h2><p>One team, one contract. We design and deliver your space on time and on budget.</p><ul><li>Cost &amp; programme control</li><li>Site management</li><li>Quality handover</li></ul></div></div>
 <div class="sv"><div class="ph im11 rv"></div><div class="rv"><h2 class="serif">Interior Fit-Out</h2><p>Precise execution of finishes, joinery, lighting and systems to the highest standard.</p><ul><li>Joinery &amp; metalwork</li><li>MEP coordination</li><li>Snagging &amp; aftercare</li></ul></div></div>

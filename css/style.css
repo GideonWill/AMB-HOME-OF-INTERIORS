@@ -1219,23 +1219,47 @@ body:has(nav.nav-scrolled) #logo{top:calc(9px + env(safe-area-inset-top,0px));wi
 }
 
 @media (max-width:900px){
-  .footer-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2.2rem}
   .footer-brand-col{grid-column:span 2;padding-right:0}
   .footer-headline{font-size:clamp(2rem,7vw,3.4rem);max-width:100%}
   .footer-hero-wrap{gap:2rem}
 }
-@media (max-width:600px){
-  .footer-grid{grid-template-columns:1fr;gap:2.2rem}
-  .footer-brand-col{grid-column:auto}
-  .footer-utility-bar{flex-direction:column;align-items:flex-start;gap:1rem}
-  .footer-giant-mark{padding-bottom:1.5rem}
-}
 
-/* On mobile, show the footer logo deep and solid without any fading */
 @media (max-width:768px){
+  .site-footer{
+    overflow:hidden;
+  }
+  .footer-inner{
+    padding:clamp(2rem,4.5vw,2.8rem) 4vw 1rem;
+  }
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:1.8rem 1.4rem;
+  }
+  .footer-brand-col{
+    grid-column:span 2;
+    padding-right:0;
+  }
+  .footer-col:last-child{
+    grid-column:span 2;
+  }
+  .footer-utility-bar{
+    margin-top:1.8rem;
+    padding-top:1.2rem;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.75rem;
+  }
   .footer-giant-mark{
+    position:relative;
+    overflow:hidden;
     opacity:1 !important;
     transform:none !important;
+    margin:0 !important;
+    padding:0.4rem 4vw 1.2rem !important;
+  }
+  .footer-giant-svg{
+    max-height:clamp(60px,16vw,120px);
   }
   #giant-mark stop,
   #giant-fade stop,
@@ -1252,10 +1276,43 @@ body:has(nav.nav-scrolled) #logo{top:calc(9px + env(safe-area-inset-top,0px));wi
     opacity:1 !important;
   }
 }
+
+@media (max-width:480px){
+  .footer-inner{
+    padding:1.8rem 4vw .8rem;
+  }
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem 1rem;
+  }
+  .footer-col-title{
+    margin-bottom:.8rem;
+  }
+  .footer-nav-list{
+    font-size:.88rem;
+    gap:.5rem;
+  }
+  .footer-brand-desc{
+    font-size:.85rem;
+    line-height:1.6;
+  }
+  .footer-utility-bar{
+    margin-top:1.4rem;
+    padding-top:1rem;
+  }
+  .footer-giant-mark{
+    padding:0.2rem 4vw 1rem !important;
+  }
+  .footer-giant-svg{
+    max-height:clamp(50px,14vw,80px);
+  }
+}
+
 :root[data-theme="dark"] .footer-giant-svg path,
 :root[data-theme="dark"] .footer-giant-svg text{
   fill:#ffffff !important;
 }
+
 @media (max-width:768px) and (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) #giant-mark stop,
   :root:not([data-theme="light"]) #giant-fade stop,
