@@ -393,45 +393,54 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 .footer-copy{
   font-size:13px;
 }
-/* Screen-floating Back to Top Button */
+/* ════════════════════════════════════════════════════════════════════════════
+   ARCHITECTURAL FLOATING "BACK TO TOP" (Classy Glassmorphic Signature)
+   ════════════════════════════════════════════════════════════════════════════ */
 .footer-top-btn,
 #back-to-top{
   position:fixed;
   right:4vw;
-  bottom:calc(82px + env(safe-area-inset-bottom,0px));
+  bottom:calc(80px + env(safe-area-inset-bottom,0px));
   z-index:46;
-  background:rgba(244,250,246,.88);
-  border:1px solid var(--line);
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(10,38,22,.14);
   color:var(--fg);
   font:inherit;
-  font-size:11px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  font-size:10.5px;
   font-weight:600;
-  letter-spacing:.14em;
+  letter-spacing:.18em;
   text-transform:uppercase;
   display:inline-flex;
   align-items:center;
   gap:.75rem;
   cursor:pointer;
-  padding:6px 8px 6px 16px;
+  padding:6px 7px 6px 16px;
   border-radius:999px;
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  box-shadow:0 8px 24px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:0 12px 32px rgba(10,38,22,.08), 0 2px 8px rgba(10,38,22,.04), inset 0 1px 1px rgba(255,255,255,.8);
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transform:translateY(14px);
-  transition:opacity .35s cubic-bezier(.19,1,.22,1),
-             transform .35s cubic-bezier(.19,1,.22,1),
-             visibility .35s ease,
-             background .3s, color .3s, border-color .3s, box-shadow .3s;
+  transform:translateY(14px) scale(.95);
+  transition:opacity .4s cubic-bezier(.19,1,.22,1),
+             transform .4s cubic-bezier(.19,1,.22,1),
+             visibility .4s ease,
+             background .35s ease,
+             color .35s ease,
+             border-color .35s ease,
+             box-shadow .35s ease;
+  user-select:none;
+  outline:none;
 }
 
-#back-to-top.visible{
+#back-to-top.visible,
+.footer-top-btn.visible{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translateY(0);
+  transform:translateY(0) scale(1);
 }
 
 :root[data-theme="dark"] .footer-top-btn,
@@ -439,10 +448,10 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .footer-top-btn,
   :root:not([data-theme="light"]) #back-to-top{
-    background:rgba(6,20,12,.88);
-    border-color:rgba(255,255,255,.16);
-    color:#ffffff;
-    box-shadow:0 8px 24px rgba(0,0,0,.45);
+    background:rgba(8,24,14,.84);
+    border-color:rgba(255,255,255,.14);
+    color:#f4faf6;
+    box-shadow:0 14px 36px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.12);
   }
 }
 
@@ -451,8 +460,8 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
   background:var(--acc);
   border-color:var(--acc);
   color:#ffffff;
-  transform:translateY(-3px);
-  box-shadow:0 12px 28px -4px rgba(0,160,85,.4), 0 0 0 1px rgba(0,160,85,.35);
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 16px 36px -4px rgba(0,160,85,.4), 0 0 0 1px rgba(0,160,85,.35);
 }
 
 :root[data-theme="dark"] .footer-top-btn:hover,
@@ -460,23 +469,90 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .footer-top-btn:hover,
   :root:not([data-theme="light"]) #back-to-top:hover{
-    background:rgba(0,192,102,.2);
-    border-color:var(--acc);
-    color:#ffffff;
-    box-shadow:0 12px 30px -4px rgba(0,192,102,.35),0 0 0 1px rgba(0,192,102,.4);
+    background:#00c066;
+    border-color:#00c066;
+    color:#06140c;
+    box-shadow:0 16px 36px -4px rgba(0,192,102,.42), 0 0 0 1px rgba(0,192,102,.45);
   }
 }
 
 .footer-top-btn:active,
 #back-to-top:active{
-  transform:scale(.96) translateY(-1px);
+  transform:scale(.95) translateY(0);
+  transition-duration:.12s;
+}
+
+.footer-top-text{
+  display:inline-block;
+  line-height:1;
+  padding-top:1px;
+}
+
+.footer-top-icon{
+  position:relative;
+  overflow:hidden;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(10,38,22,.06);
+  color:currentColor;
+  border:1px solid rgba(10,38,22,.08);
+  transition:all .35s cubic-bezier(.19,1,.22,1);
+}
+
+:root[data-theme="dark"] .footer-top-icon,
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .footer-top-icon{
+    background:rgba(255,255,255,.08);
+    border-color:rgba(255,255,255,.12);
+    color:currentColor;
+  }
 }
 
 .footer-top-btn:hover .footer-top-icon,
 #back-to-top:hover .footer-top-icon{
-  background:rgba(255,255,255,.2);
+  background:rgba(255,255,255,.22);
   border-color:transparent;
   color:#ffffff;
+}
+
+:root[data-theme="dark"] .footer-top-btn:hover .footer-top-icon,
+:root[data-theme="dark"] #back-to-top:hover .footer-top-icon,
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .footer-top-btn:hover .footer-top-icon,
+  :root:not([data-theme="light"]) #back-to-top:hover .footer-top-icon{
+    background:rgba(6,20,12,.18);
+    border-color:transparent;
+    color:#06140c;
+  }
+}
+
+.footer-top-arrow{
+  width:13px;
+  height:13px;
+}
+
+.footer-top-arrow.arrow-1{
+  position:absolute;
+  transition:transform .4s cubic-bezier(.19,1,.22,1);
+}
+
+.footer-top-arrow.arrow-2{
+  position:absolute;
+  transform:translateY(135%);
+  transition:transform .4s cubic-bezier(.19,1,.22,1);
+}
+
+.footer-top-btn:hover .footer-top-arrow.arrow-1,
+#back-to-top:hover .footer-top-arrow.arrow-1{
+  transform:translateY(-135%);
+}
+
+.footer-top-btn:hover .footer-top-arrow.arrow-2,
+#back-to-top:hover .footer-top-arrow.arrow-2{
+  transform:translateY(0);
 }
 
 @media (max-width:800px){
@@ -501,55 +577,6 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
     background:transparent;
     border:none;
   }
-}
-.footer-top-text{
-  font-family:'Helvetica Neue',Arial,sans-serif;
-  transition:color .3s;
-}
-.footer-top-icon{
-  position:relative;
-  overflow:hidden;
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:rgba(10,38,22,.06);
-  color:var(--fg);
-  border:1px solid var(--line);
-  transition:all .4s cubic-bezier(.19,1,.22,1);
-}
-:root[data-theme="dark"] .footer-top-icon,
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .footer-top-icon{
-    background:rgba(255,255,255,.08);
-    border-color:rgba(255,255,255,.12);
-    color:#ffffff;
-  }
-}
-.footer-top-btn:hover .footer-top-icon{
-  background:var(--acc);
-  border-color:var(--acc);
-  color:#ffffff;
-}
-.footer-top-arrow{
-  width:13px;
-  height:13px;
-}
-.footer-top-arrow.arrow-1{
-  position:absolute;
-  transition:transform .4s cubic-bezier(.19,1,.22,1);
-}
-.footer-top-arrow.arrow-2{
-  position:absolute;
-  transform:translateY(130%);
-  transition:transform .4s cubic-bezier(.19,1,.22,1);
-}
-.footer-top-btn:hover .footer-top-arrow.arrow-1{
-  transform:translateY(-130%);
-}
-.footer-top-btn:hover .footer-top-arrow.arrow-2{
-  transform:translateY(0);
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -762,6 +789,7 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 <div class="cur" id="cur"></div>
 <a id="logo" href="#/" aria-label="AMB Home of Interiors"><span class="lg"></span></a>
 <a id="wa" href="https://wa.me/233599600001" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 32 32"><path d="M5 5h22a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H14l-6 5v-5H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span>WhatsApp us</span></a>
+<button class="footer-top-btn" id="back-to-top" type="button" aria-label="Back to top"><span class="footer-top-text">Back to top</span><span class="footer-top-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" class="footer-top-arrow arrow-1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5V3.5M3.5 8L8 3.5 12.5 8"/></svg><svg viewBox="0 0 16 16" fill="none" class="footer-top-arrow arrow-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5V3.5M3.5 8L8 3.5 12.5 8"/></svg></span></button>
 <nav><div class="links"><a href="#/about">About</a><a href="#/projects">Projects</a><a href="#/archive">Archive</a><a href="#/services">Services</a><a href="#/contact">Contact</a></div><button id="mbtn" aria-label="Open menu"><span></span><span></span><span></span></button></nav>
 
 <main class="page on" id="p-"><header class="hero" id="top">
@@ -1025,15 +1053,20 @@ setInterval(updateGhanaClock,10000);
 
 const btt=$('#back-to-top');
 if(btt){
-  btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+  btt.addEventListener('click',e=>{
+    e.preventDefault();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
   function toggleBtt(){
-    if(window.scrollY>280){
+    const y=window.scrollY||document.documentElement.scrollTop||0;
+    if(y>240){
       btt.classList.add('visible');
     }else{
       btt.classList.remove('visible');
     }
   }
   window.addEventListener('scroll',toggleBtt,{passive:true});
+  window.addEventListener('resize',toggleBtt,{passive:true});
   toggleBtt();
 }
 

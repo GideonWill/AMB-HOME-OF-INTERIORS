@@ -279,15 +279,20 @@ setInterval(updateGhanaClock,10000);
 
 const btt=$('#back-to-top');
 if(btt){
-  btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+  btt.addEventListener('click',e=>{
+    e.preventDefault();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
   function toggleBtt(){
-    if(window.scrollY>280){
+    const y=window.scrollY||document.documentElement.scrollTop||0;
+    if(y>240){
       btt.classList.add('visible');
     }else{
       btt.classList.remove('visible');
     }
   }
   window.addEventListener('scroll',toggleBtt,{passive:true});
+  window.addEventListener('resize',toggleBtt,{passive:true});
   toggleBtt();
 }
 
