@@ -498,23 +498,22 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 .ph::after{background:linear-gradient(transparent 62%,rgba(0,0,0,.28));mix-blend-mode:normal}
 .hero .ph::after,.prh>.ph::after{background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.08) 40%,rgba(0,0,0,.68))}
 .im1{--img:url("../images/01-dark-kitchen.jpg");--pos:center 55%}
-.im2{--img:url("../images/02-white-smart-kitchen.jpg");}
+.im2{--img:url("../images/02-twin-bedroom-suite.jpg");--pos:center 50%}
 .im3{--img:url("../images/living%20room%201.jpeg");}
-.im-about-philosophy, .im4{--img:url("../images/about-philosophy-salon.jpg");--pos:center 55%}
+.im4{--img:url("../images/04-master-bedroom-suite.jpg");--pos:center 50%}
 .im5{--img:url("../images/05-dark-dining-halo-lights.jpg");}
-.im6{--img:url("../images/chefs-atelier.jpg");--pos:center 55%}
+.im6{--img:url("../images/chefs-atelier.jpg");--pos:center 50%}
 .im7{--img:url("../images/07-modern-living-blue-curtains.jpg");--pos:center 55%}
 .im8{--img:url("../images/interior%201.jpeg");--pos:center 40%}
 .im9{--img:url("../images/living%20room%202.jpeg");--pos:center 28%}
 .im10{--img:url("../images/10-grand-hall-chandelier.jpg");--pos:center 50%}
 .im11{--img:url("../images/kyoto-suite.jpg");}
-.im12{--img:url("../images/12-marble-floor-living.jpg");}
+.im12{--img:url("../images/12-modern-living-room.jpg");--pos:center 50%}
 .im13{--img:url("../images/13-curved-wood-kitchen.png");}
-.im14{--img:url("../images/14-white-and-charcoal-kitchen.png");}
-.im15{--img:url("../images/15-solstice-lounge.jpg");--pos:center 50%}
+.im15{--img:url("../images/15-contemporary-lounge.jpg");--pos:center 50%}
 .im16{--img:url("../images/16-lumina-master-suite.jpg");--pos:center 50%}
 .im17{--img:url("../images/17-glass-spa-ensuite.jpg");--pos:center 50%}
-.im18{--img:url("../images/18-atelier-dressing-gallery.jpg");--pos:center 50%}
+.im18{--img:url("../images/18-executive-walk-in-wardrobe.jpg");--pos:center 50%}
 .im19,.im-clean1{--img:url("../images/cleaning-deep.jpg");--pos:center 50%}
 .im20,.im-clean2{--img:url("../images/cleaning-residential.jpg");--pos:center 50%}
 .im21,.im-clean3{--img:url("../images/cleaning-estate.jpg");--pos:center 50%}
@@ -573,29 +572,7 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
   filter: brightness(1.06);
 }
 .video-play-badge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: inline-flex;
-  align-items: center;
-  gap: .55rem;
-  padding: .65rem 1.15rem;
-  border-radius: 9999px;
-  background: rgba(14, 15, 17, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #fff;
-  font-family: inherit;
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  font-weight: 500;
-  pointer-events: none;
-  transition: transform .35s cubic-bezier(.19,1,.22,1), background .3s ease, border-color .3s ease, box-shadow .35s ease;
-  z-index: 4;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  display: none !important;
 }
 .video-container:hover .video-play-badge,
 .home-media-card:hover .video-play-badge,
