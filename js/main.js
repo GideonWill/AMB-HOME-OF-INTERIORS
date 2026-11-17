@@ -47,9 +47,9 @@ addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
 (function f(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;hov.style.left=cx+'px';hov.style.top=cy+'px';requestAnimationFrame(f)})();
 $$('.svc a').forEach(a=>{a.onmouseenter=()=>{if(a.dataset.g)hov.className='ph on '+a.dataset.g};a.onmouseleave=()=>hov.classList.remove('on')});
 // router with curtain transition
-const P={modernliving:{t:'Modern Living Room',c:'Living Room',k:'living',loc:'East Legon, Accra',y:'2025',a:'560 m\u00b2',i:12,g:[12,15,7,8,3],d:'A contemporary living room defined by a fluted wood accent wall, sculptural circular chandeliers, plush sectional seating, and high-gloss marble floors.'},lounge:{t:'Contemporary Lounge',c:'Living & Dining',k:'living',loc:'Airport Hills, Accra',y:'2025',a:'480 m\u00b2',i:15,g:[15,12,1,7,3],d:'An open-concept living lounge featuring a sculptural boat pendant fixture, warm backlit wall slats, burnt orange seating, and a marble waterfall island.'},wardrobe:{t:'Walk-in Wardrobe',c:'Dressing & Study',k:'living',loc:'Cantonments, Accra',y:'2025',a:'160 m\u00b2',i:18,g:[18,4,16,17],d:'A symmetrical dressing room gallery featuring bronze tinted glass wardrobes, integrated vertical illumination, slatted wood ceiling, and a central glass executive desk.'},masterbed:{t:'Master Bedroom Suite',c:'Master Bedroom',k:'living',loc:'Roman Ridge, Accra',y:'2025',a:'180 m\u00b2',i:4,g:[4,18,16,17,2],d:'A serene master bedroom suite featuring an upholstered channel headboard, dark wood wall slats, drop pendant reading lights, and tailored drapery.'},twinbed:{t:'Twin Bedroom Suite',c:'Guest Bedroom',k:'living',loc:'Airport Residential, Accra',y:'2025',a:'140 m\u00b2',i:2,g:[2,4,24,7],d:'A contemporary twin bedroom suite with integrated study workstations, floor-to-ceiling wardrobes, and modern cloud pendant lighting.'},skyline:{t:'Skyline Living Room',c:'Living Room',k:'living',loc:'East Legon, Accra',y:'2025',a:'780 m\u00b2',i:3,g:[7,8,1,3],d:'A residence composed around a panoramic city view, layered with sculpted seating, a sculptural glass chandelier and a fireplace wall in stone.'},lumina:{t:'Lumina Bedroom Suite',c:'Bedroom',k:'living',loc:'Roman Ridge, Accra',y:'2025',a:'180 m\u00b2',i:16,g:[16,17,7,8,3],d:'A serene primary bedroom defined by an undulating acoustic slat headboard with warm perimeter illumination and a floating architectural tray ceiling.'},noir:{t:'Noir Dining Room',c:'Dining Room',k:'dining',loc:'Airport Residential, Accra',y:'2025',a:'140 m\u00b2',i:26,videoSrc:'images/dining-space-1.mp4',g:[26,5,10,1],d:'A bespoke contemporary dining salon defined by custom joinery, sculptural lighting, rich materials, and warm ambient illumination.'},onyx:{t:'Onyx Spa Ensuite',c:'Bathroom',k:'living',loc:'East Legon Hills, Accra',y:'2024',a:'95 m\u00b2',i:17,g:[17,16,7,3,10],d:'A framed glass sanctuary featuring a freestanding sculptural soaking tub, striated marble wall slabs, and warm natural oak joinery.'},halo:{t:'Halo Penthouse',c:'Penthouse',k:'living',loc:'Cantonments, Accra',y:'2024',a:'540 m\u00b2',i:8,g:[7,8,3,10],d:'A starlit ceiling, glass staircase and a fireplace set into white stone turn a penthouse lounge into a night-sky retreat.'},atelier:{t:'Double-Height Salon',c:'Living Room',k:'living',loc:'Airport Hills, Accra',y:'2025',a:'520 m\u00b2',i:6,g:[7,24,6,3],d:'An imposing architectural double-height residence featuring a glass-balustrade mezzanine gallery, geometric perimeter LED light tracks, cognac modular leather seating, and bespoke marble media joinery.'},spiral:{t:'Private Reserve Bar',c:'Bar & Lounge',k:'living',loc:'Trasacco Valley, Accra',y:'2024',a:'960 m\u00b2',i:9,g:[10,9,7,3],d:'A bespoke floor-to-ceiling bar display vitrine in rich natural walnut with smoked glass vitrines, warm integrated LED shelving, and a waterfall marble cocktail island.'},kyoto:{t:'Kyoto Living Suite',c:'Living Room',k:'living',loc:'Osu, Accra',y:'2023',a:'320 m\u00b2',i:11,g:[11,7,8,10],d:'Timber lattice screens, warm cove lighting and a mirror-polished floor bring quiet Japanese restraint to an Accra apartment.'},ember:{t:'Ember Kitchen',c:'Kitchen',k:'kitchen',loc:'Dzorwulu, Accra',y:'2022',a:'—',i:1,g:[1,6,10],d:'Explore this Dzorwulu kitchen through photographs of considered cabinetry, natural finishes and contemporary kitchen design.'},azure:{t:'Azure Residence',c:'Living Room',k:'living',loc:'Spintex, Accra',y:'2021',a:'—',i:7,g:[3,8,11],d:'Explore this Spintex lounge through photographs of relaxed living spaces, architectural detail and contemporary interiors.'},foyer:{t:'Grand Entrance Foyer',c:'Entrance Foyer',k:'living',loc:'Aburi',y:'2020',a:'—',i:10,g:[9,10,3,7],d:'Explore this Aburi foyer through photographs of elegant interior spaces, sculptural forms and considered material details.'},curtains:{t:'Architectural Drapery',c:'Curtains & Drapery',k:'living',loc:'Airport Residential, Accra',y:'2025',a:'380 m\u00b2',i:24,g:[24,4,7,8],d:'Bespoke floor-to-ceiling sheer and blackout curtains tailored for modern architectural living, paired with custom lounge seating and warm ambient illumination.'},amb360clean:{t:'Architectural Villa Clean',c:'Villa Cleaning',k:'cleaning',loc:'Airport Hills, Accra',y:'2026',a:'1,200 m\u00b2',i:25,videoSrc:'images/cleaning-hero-v16.mp4',g:[25,19,20,21,22,23],d:'Precision architectural glass detailing and post-construction sanitization by AMB 360 Cleaning Agency for premier residential estates and luxury villas.'},amb360:{t:'Estate Deep Clean',c:'Deep Cleaning',k:'cleaning',loc:'Airport Hills & East Legon, Accra',y:'2026',a:'1,200 m\u00b2',i:20,videoSrc:'images/cleaning-video-2.mp4',g:[20,19,21,22,23],d:'Comprehensive post-construction and move-in deep cleaning by AMB360 Cleaning Agency for landmark residential estates and luxury interiors across Accra. Includes high-reach architectural dusting and pristine surface detailing.'},amb360buffing:{t:'Marble Floor Polishing',c:'Floor Buffing',k:'cleaning',loc:'Airport Residential, Accra',y:'2026',a:'950 m\u00b2',i:19,videoSrc:'images/cleaning-video-1.mp4',g:[19,25,20,21],d:'Heavy-duty industrial marble buffing, diamond floor polishing, and post-construction surface decontamination restoring raw stone to high-gloss mirror clarity.'},amb360handover:{t:'Move-In Handover Clean',c:'Move-In Cleaning',k:'cleaning',loc:'Cantonments, Accra',y:'2026',a:'850 m\u00b2',i:21,videoSrc:'images/cleaning-video-3.mp4',g:[21,22,23,19],d:'Zero-snag post-renovation detailing, micro-fibre joinery wipedown, and medical-grade room preparation for immediate luxury handover.'}};
+const P={modernliving:{t:'Modern Living Room',c:'Living Room',k:'living',loc:'East Legon, Accra',y:'2025',a:'560 m\u00b2',i:12,g:[12,15,7,8,3],d:'A contemporary living room defined by a fluted wood accent wall, sculptural circular chandeliers, plush sectional seating, and high-gloss marble floors.'},lounge:{t:'Contemporary Lounge',c:'Living & Dining',k:'living',loc:'Airport Hills, Accra',y:'2025',a:'480 m\u00b2',i:15,g:[15,12,18,7,3],d:'An open-concept living lounge featuring a sculptural boat pendant fixture, warm backlit wall slats, burnt orange seating, and a marble waterfall island.'},wardrobe:{t:'Walk-in Wardrobe',c:'Dressing & Study',k:'bedroom',loc:'Cantonments, Accra',y:'2025',a:'160 m\u00b2',i:18,g:[18,4,16,17],d:'A symmetrical dressing room gallery featuring bronze tinted glass wardrobes, integrated vertical illumination, slatted wood ceiling, and a central glass executive desk.'},masterbed:{t:'Master Bedroom Suite',c:'Master Bedroom',k:'bedroom',loc:'Roman Ridge, Accra',y:'2025',a:'180 m\u00b2',i:4,g:[4,18,16,17,2],d:'A serene master bedroom suite featuring an upholstered channel headboard, dark wood wall slats, drop pendant reading lights, and tailored drapery.'},twinbed:{t:'Twin Bedroom Suite',c:'Guest Bedroom',k:'bedroom',loc:'Airport Residential, Accra',y:'2025',a:'140 m\u00b2',i:2,g:[2,4,24,7],d:'A contemporary twin bedroom suite with integrated study workstations, floor-to-ceiling wardrobes, and modern cloud pendant lighting.'},skyline:{t:'Skyline Residence',c:'Living Room',k:'living',loc:'East Legon, Accra',y:'2025',a:'780 m\u00b2',i:3,g:[7,8,12,3],d:'A residence composed around a panoramic city view, layered with sculpted seating, a sculptural glass chandelier and a fireplace wall in stone.'},lumina:{t:'Lumina Bedroom Suite',c:'Bedroom',k:'bedroom',loc:'Roman Ridge, Accra',y:'2025',a:'180 m\u00b2',i:16,g:[16,17,7,8,3],d:'A serene primary bedroom defined by an undulating acoustic slat headboard with warm perimeter illumination and a floating architectural tray ceiling.'},onyx:{t:'Onyx Spa Ensuite',c:'Bathroom',k:'living',loc:'East Legon Hills, Accra',y:'2024',a:'95 m\u00b2',i:17,g:[17,16,7,3,10],d:'A framed glass sanctuary featuring a freestanding sculptural soaking tub, striated marble wall slabs, and warm natural oak joinery.'},halo:{t:'Halo Penthouse',c:'Penthouse',k:'living',loc:'Cantonments, Accra',y:'2024',a:'540 m\u00b2',i:8,g:[7,8,3,10],d:'A starlit ceiling, glass staircase and a fireplace set into white stone turn a penthouse lounge into a night-sky retreat.'},atelier:{t:'Double-Height Salon',c:'Living Room',k:'living',loc:'Airport Hills, Accra',y:'2025',a:'520 m\u00b2',i:12,g:[7,24,12,3],d:'An imposing architectural double-height residence featuring a glass-balustrade mezzanine gallery, geometric perimeter LED light tracks, modular seating, and bespoke media joinery.'},spiral:{t:'Private Reserve Bar',c:'Bar & Lounge',k:'living',loc:'Trasacco Valley, Accra',y:'2024',a:'960 m\u00b2',i:9,g:[10,9,7,3],d:'A bespoke floor-to-ceiling bar display vitrine in rich natural walnut with smoked glass vitrines, warm integrated LED shelving, and a waterfall cocktail island.'},kyoto:{t:'Kyoto Living Suite',c:'Living Room',k:'living',loc:'Osu, Accra',y:'2023',a:'320 m\u00b2',i:11,g:[11,7,8,10],d:'Timber lattice screens, warm cove lighting and a mirror-polished floor bring quiet Japanese restraint to an Accra apartment.'},azure:{t:'Azure Residence',c:'Living Room',k:'living',loc:'Spintex, Accra',y:'2021',a:'—',i:7,g:[3,8,11],d:'Explore this Spintex lounge through photographs of relaxed living spaces, architectural detail and contemporary interiors.'},foyer:{t:'Grand Entrance Foyer',c:'Entrance Foyer',k:'living',loc:'Aburi',y:'2020',a:'—',i:10,g:[9,10,3,7],d:'Explore this Aburi foyer through photographs of elegant interior spaces, sculptural forms and considered material details.'},curtains:{t:'Architectural Drapery',c:'Curtains & Drapery',k:'living',loc:'Airport Residential, Accra',y:'2025',a:'380 m\u00b2',i:24,g:[24,4,7,8],d:'Bespoke floor-to-ceiling sheer and blackout curtains tailored for modern architectural living, paired with custom lounge seating and warm ambient illumination.'},amb360clean:{t:'Architectural Villa Clean',c:'Villa Cleaning',k:'cleaning',loc:'Airport Hills, Accra',y:'2026',a:'1,200 m\u00b2',i:25,videoSrc:'images/cleaning-hero-v16.mp4',g:[25,19,20,21,22,23],d:'Precision architectural glass detailing and post-construction sanitization by AMB 360 Cleaning Agency for premier residential estates and luxury villas.'},amb360:{t:'Estate Deep Clean',c:'Deep Cleaning',k:'cleaning',loc:'Airport Hills & East Legon, Accra',y:'2026',a:'1,200 m\u00b2',i:20,videoSrc:'images/cleaning-video-2.mp4',g:[20,19,21,22,23],d:'Comprehensive post-construction and move-in deep cleaning by AMB360 Cleaning Agency for landmark residential estates and luxury interiors across Accra. Includes high-reach architectural dusting and pristine surface detailing.'},amb360buffing:{t:'Marble Floor Polishing',c:'Floor Buffing',k:'cleaning',loc:'Airport Residential, Accra',y:'2026',a:'950 m\u00b2',i:19,videoSrc:'images/cleaning-video-1.mp4',g:[19,25,20,21],d:'Heavy-duty industrial marble buffing, diamond floor polishing, and post-construction surface decontamination restoring raw stone to high-gloss mirror clarity.'},amb360handover:{t:'Move-In Handover Clean',c:'Move-In Cleaning',k:'cleaning',loc:'Cantonments, Accra',y:'2026',a:'850 m\u00b2',i:21,videoSrc:'images/cleaning-video-3.mp4',g:[21,22,23,19],d:'Zero-snag post-renovation detailing, micro-fibre joinery wipedown, and medical-grade room preparation for immediate luxury handover.'}};
 const ids=Object.keys(P);
-const imageFiles={1:'01-dark-kitchen.jpg',2:'02-twin-bedroom-suite.jpg',3:'living%20room%201.jpeg',4:'04-master-bedroom-suite.jpg',5:'05-dark-dining-halo-lights.jpg',6:'chefs-atelier.jpg',7:'07-modern-living-blue-curtains.jpg',8:'interior%201.jpeg',9:'living%20room%202.jpeg',10:'10-grand-hall-chandelier.jpg',11:'kyoto-suite.jpg',12:'12-modern-living-room.jpg',15:'15-contemporary-lounge.jpg',16:'16-lumina-master-suite.jpg',17:'17-glass-spa-ensuite.jpg',18:'18-executive-walk-in-wardrobe.jpg',19:'cleaning-deep.jpg',20:'cleaning-residential.jpg',21:'cleaning-estate.jpg',22:'cleaning-estate-accra.jpg',23:'cleaning-home.jpeg',24:'24-modern-living-curtains.jpg',25:'25-amb360-estate-cleaning.jpg',26:'dining-space-poster.jpg'};
+const imageFiles={2:'02-twin-bedroom-suite.jpg',3:'living%20room%201.jpeg',4:'04-master-bedroom-suite.jpg',7:'07-modern-living-blue-curtains.jpg',8:'interior%201.jpeg',9:'living%20room%202.jpeg',10:'10-grand-hall-chandelier.jpg',11:'kyoto-suite.jpg',12:'12-modern-living-room.jpg',15:'15-contemporary-lounge.jpg',16:'16-lumina-master-suite.jpg',17:'17-glass-spa-ensuite.jpg',18:'18-executive-walk-in-wardrobe.jpg',19:'cleaning-deep.jpg',20:'cleaning-residential.jpg',21:'cleaning-estate.jpg',22:'cleaning-estate-accra.jpg',23:'cleaning-home.jpeg',24:'24-modern-living-curtains.jpg',25:'25-amb360-estate-cleaning.jpg'};
 const imagePath=id=>`images/${imageFiles[id]}`;
 const viewer=$('#gallery-viewer'),viewerImage=$('#viewer-image'),viewerTitle=$('#viewer-title'),viewerCount=$('#viewer-count'),viewerCaption=$('#viewer-caption'),viewerThumbs=$('#viewer-thumbs');
 let galleryImages=[],galleryIndex=0,galleryTitle='';
@@ -128,7 +128,7 @@ $('.grid').innerHTML=ids.map(id=>{
     <a class="it rv" data-c="${p.k}" href="#/project/${id}">
       <div class="w ${p.videoSrc ? 'video-container' : ''}">
         ${p.videoSrc ? `
-          <video class="video-clickable project-card-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="${imagePath(p.i)}" src="${p.videoSrc}" data-video-src="${p.videoSrc}" data-video-title="${p.t}"></video>
+          <video class="project-card-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="${imagePath(p.i)}" src="${p.videoSrc}"></video>
         ` : `
           <div class="ph im${p.i}"></div>
         `}
@@ -145,7 +145,7 @@ const heroTrack = document.getElementById('hero-track');
 const heroStrip = document.getElementById('hero-strip');
 const heroBarProg = document.getElementById('hero-bar-prog');
 
-const heroProjectKeys = ['noir', 'amb360clean', 'modernliving', 'lounge', 'wardrobe', 'masterbed', 'curtains'];
+const heroProjectKeys = ['modernliving', 'amb360clean', 'lounge', 'wardrobe', 'masterbed', 'twinbed', 'curtains'];
 const heroProjects = heroProjectKeys.map(k => ({ id: k, ...P[k], imgSrc: imagePath(P[k].i) }));
 
 if (heroTrack && heroStrip) {
@@ -153,11 +153,7 @@ if (heroTrack && heroStrip) {
   heroTrack.innerHTML = heroProjects.map((p, idx) => `
     <div class="hero-slide${idx === 0 ? ' active' : ''}" data-hero-index="${idx}">
       ${p.videoSrc ? `
-        <video class="hero-slide-img hero-slide-video video-clickable" src="${p.videoSrc}" autoplay muted loop playsinline preload="auto" poster="${p.imgSrc}" data-video-src="${p.videoSrc}" data-video-title="${p.t}"></video>
-        <button class="hero-video-badge" type="button" data-video-src="${p.videoSrc}" data-video-title="${p.t}" aria-label="Watch video in full player">
-          <svg viewBox="0 0 24 24" width="13" height="13"><polygon points="6,4 20,12 6,20"/></svg>
-          <span>Watch Video</span>
-        </button>
+        <video class="hero-slide-img hero-slide-video" src="${p.videoSrc}" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="${p.imgSrc}"></video>
       ` : `
         <img class="hero-slide-img" src="${p.imgSrc}" alt="${p.t}" loading="${idx < 2 ? 'eager' : 'lazy'}">
       `}
@@ -167,7 +163,6 @@ if (heroTrack && heroStrip) {
         <h2 class="hero-slide-name">${p.t}</h2>
         <div class="hero-slide-actions">
           <a class="hero-slide-cta" href="#/project/${p.id}">View Project <span>→</span></a>
-          ${p.videoSrc ? `<button class="hero-slide-play-cta" type="button" data-video-src="${p.videoSrc}" data-video-title="${p.t}"><svg viewBox="0 0 24 24" width="12" height="12"><polygon points="6,4 20,12 6,20"/></svg> <span>Play Reel</span></button>` : ''}
         </div>
       </div>
     </div>
@@ -499,56 +494,51 @@ if(giantMark&&siteFooter){
   });
 }
 
-function setupClickableVideos() {
+function setupAutoplayVideos() {
   const scrollVideoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const vid = entry.target;
       if (entry.isIntersecting) {
-        if (vid.paused) {
-          vid.muted = true;
-          vid.play().catch(() => {});
-        }
+        vid.muted = true;
+        vid.defaultMuted = true;
+        vid.play().catch(() => {});
       }
     });
-  }, { rootMargin: '140px 0px', threshold: 0.05 });
+  }, { rootMargin: '200px 0px', threshold: 0.01 });
 
-  document.querySelectorAll('video').forEach(vid => {
-    vid.classList.add('video-clickable');
+  function initVideo(vid) {
     vid.muted = true;
+    vid.defaultMuted = true;
+    vid.autoplay = true;
+    vid.loop = true;
+    vid.playsInline = true;
+    vid.setAttribute('autoplay', '');
+    vid.setAttribute('muted', '');
+    vid.setAttribute('loop', '');
     vid.setAttribute('playsinline', '');
     vid.setAttribute('webkit-playsinline', '');
+    vid.setAttribute('disablePictureInPicture', '');
     scrollVideoObserver.observe(vid);
-  });
+    vid.play().catch(() => {});
+  }
 
-  document.addEventListener('click', e => {
-    const isExplicitVideoClick = !!e.target.closest('video, .video-play-badge, .video-container, .hero-video-badge, .hero-slide-play-cta, .projects-hero-badge');
-    const trigger = e.target.closest('[data-video-src], .video-container, .home-media-card, .clientele-media-card, .about-craft-card, .cleaning-video-card, .projects-hero-wrap, .hero-slide-video, .hero-video-badge, .hero-slide-play-cta');
-    if (!trigger) return;
+  document.querySelectorAll('video').forEach(initVideo);
 
-    // If click is on a text anchor link and not directly on a video or badge, let default navigation occur
-    if (!isExplicitVideoClick && e.target.closest('a:not(.video-trigger)')) return;
-
-    let src = trigger.dataset.videoSrc;
-    let title = trigger.dataset.videoTitle;
-
-    const vid = trigger.tagName === 'VIDEO' ? trigger : trigger.querySelector('video');
-    if (!src && vid) {
-      src = vid.currentSrc || vid.getAttribute('src') || vid.querySelector('source')?.getAttribute('src');
-    }
-    if (!src) return;
-
-    if (!title) {
-      const heading = trigger.closest('.it, .home-media-card, .clientele-media-card, .about-craft-card, .cleaning-video-card, .hero-slide, .projects-hero-wrap')
-        ?.querySelector('h2, h3, b, .hero-slide-name');
-      title = heading ? heading.textContent.trim() : 'AMB Architectural Reel';
-    }
-
-    e.preventDefault();
-    e.stopPropagation();
-    openVideoViewer(src, title);
+  // Universal mobile & desktop unlock so videos start automatically without tapping
+  const unlockAutoplay = () => {
+    document.querySelectorAll('video').forEach(vid => {
+      if (vid.paused) {
+        vid.muted = true;
+        vid.defaultMuted = true;
+        vid.play().catch(() => {});
+      }
+    });
+  };
+  ['touchstart', 'touchend', 'scroll', 'click'].forEach(evt => {
+    window.addEventListener(evt, unlockAutoplay, { passive: true, once: true });
   });
 }
 
-setupClickableVideos();
+setupAutoplayVideos();
 
 

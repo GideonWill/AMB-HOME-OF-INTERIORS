@@ -497,19 +497,18 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 .ph{background-position:var(--pos,center)}.hero .ph::before{display:none}
 .ph::after{background:linear-gradient(transparent 62%,rgba(0,0,0,.28));mix-blend-mode:normal}
 .hero .ph::after,.prh>.ph::after{background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.08) 40%,rgba(0,0,0,.68))}
-.im1{--img:url("../images/01-dark-kitchen.jpg");--pos:center 55%}
+.im1{--img:url("../images/12-modern-living-room.jpg");--pos:center 55%}
 .im2{--img:url("../images/02-twin-bedroom-suite.jpg");--pos:center 50%}
 .im3{--img:url("../images/living%20room%201.jpeg");}
 .im4{--img:url("../images/04-master-bedroom-suite.jpg");--pos:center 50%}
-.im5{--img:url("../images/05-dark-dining-halo-lights.jpg");}
-.im6{--img:url("../images/chefs-atelier.jpg");--pos:center 50%}
+.im5{--img:url("../images/15-contemporary-lounge.jpg");}
+.im6{--img:url("../images/12-modern-living-room.jpg");--pos:center 50%}
 .im7{--img:url("../images/07-modern-living-blue-curtains.jpg");--pos:center 55%}
 .im8{--img:url("../images/interior%201.jpeg");--pos:center 40%}
 .im9{--img:url("../images/living%20room%202.jpeg");--pos:center 28%}
 .im10{--img:url("../images/10-grand-hall-chandelier.jpg");--pos:center 50%}
 .im11{--img:url("../images/kyoto-suite.jpg");}
 .im12{--img:url("../images/12-modern-living-room.jpg");--pos:center 50%}
-.im13{--img:url("../images/13-curved-wood-kitchen.png");}
 .im15{--img:url("../images/15-contemporary-lounge.jpg");--pos:center 50%}
 .im16{--img:url("../images/16-lumina-master-suite.jpg");--pos:center 50%}
 .im17{--img:url("../images/17-glass-spa-ensuite.jpg");--pos:center 50%}
@@ -559,80 +558,46 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 }
 @media (prefers-reduced-motion:reduce){.gal .gallery-thumb .ph,.gallery-open,.viewer-close,.viewer-arrow,.viewer-thumb{transition:none}}
 
-/* ── Interactive Clickable Videos & Cinematic Video Viewer ────── */
-.video-clickable {
-  cursor: pointer;
-  transition: transform .4s cubic-bezier(.19,1,.22,1), filter .3s ease;
+/* ── Automatic Inline Videos (No Play Badges or Icons) ─────────── */
+video {
+  pointer-events: auto;
 }
-.video-container, .home-media-media, .projects-hero-wrap {
-  position: relative;
-  cursor: pointer;
-}
-.video-container:hover video, .home-media-media:hover video {
-  filter: brightness(1.06);
-}
-.video-play-badge {
-  display: none !important;
-}
-.video-container:hover .video-play-badge,
-.home-media-card:hover .video-play-badge,
-.clientele-media-card:hover .video-play-badge,
-.about-craft-card:hover .video-play-badge,
-.projects-hero-wrap:hover .video-play-badge {
-  transform: translate(-50%, -50%) scale(1.08);
-  background: rgba(20, 22, 24, 0.92);
-  border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-}
-.video-play-badge svg {
-  width: 13px;
-  height: 13px;
-  fill: currentColor;
-  transition: transform .25s ease;
-}
-.video-container:hover .video-play-badge svg,
-.home-media-card:hover .video-play-badge svg {
-  transform: scale(1.15);
-}
-
-/* Hero video presentation */
-.hero-slide-video {
+.hero-slide-video,
+.projects-hero-video,
+.project-card-video,
+.cleaning-video-card video,
+.about-craft-card video,
+.home-reel-grid video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-.hero-video-badge {
-  position: absolute;
-  top: clamp(1.2rem, 3.5vw, 2.5rem);
-  right: clamp(1.2rem, 4vw, 3.5rem);
-  z-index: 6;
-  display: inline-flex;
-  align-items: center;
-  gap: .55rem;
-  padding: .65rem 1.15rem;
-  border-radius: 9999px;
-  background: rgba(12, 14, 16, 0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #fff;
-  font-family: inherit;
-  font-size: .68rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background .3s, transform .3s, border-color .3s, box-shadow .3s;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+
+/* Hide all play buttons, watch reel badges, and overlays completely */
+.hero-video-badge,
+.hero-slide-play-cta,
+.projects-hero-badge,
+.video-play-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
-.hero-video-badge:hover {
-  background: rgba(22, 24, 27, 0.92);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.45);
+
+/* Ensure mobile Safari/Chrome never shows native play overlays */
+video::-webkit-media-controls,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
 }
-.hero-video-badge svg {
-  fill: currentColor;
-}
+
 .hero-slide-actions {
   display: flex;
   align-items: center;
@@ -643,67 +608,10 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 .hero-slide-actions .hero-slide-cta {
   margin-top: 0;
 }
-.hero-slide-play-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: .65rem;
-  padding: .65rem 1.25rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  color: #fff;
-  font-family: inherit;
-  font-size: .72rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background .25s ease, transform .25s ease, border-color .25s ease;
-}
-.hero-slide-play-cta:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-.hero-slide-play-cta svg {
-  fill: currentColor;
-}
 
-/* Projects Hero video click trigger */
 .projects-hero-wrap {
   position: relative;
   overflow: hidden;
-}
-.projects-hero-badge {
-  position: absolute;
-  bottom: clamp(1.5rem, 4vw, 3rem);
-  left: 4vw;
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  padding: .7rem 1.3rem;
-  border-radius: 9999px;
-  background: rgba(14, 15, 17, 0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-  font-family: inherit;
-  font-size: .72rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background .3s, transform .3s, border-color .3s;
-}
-.projects-hero-badge:hover {
-  background: rgba(24, 25, 28, 0.95);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-.projects-hero-badge svg {
-  fill: currentColor;
 }
 
 /* Cinematic Video Viewer Dialog */
