@@ -448,6 +448,13 @@ section{padding:16vh 4vw}
 .g5{--g:linear-gradient(150deg,#241c14,#5e4a30 45%,#e0c8a0 78%,#33281c)}.g6{--g:linear-gradient(135deg,#1a1d1c,#56635d 50%,#c6cfc6 82%,#262b29)}
 .prh{height:100vh;height:100svh;position:relative;display:flex;align-items:flex-end;overflow:hidden}.prh>.ph{position:absolute;inset:-2%;animation:zoom 28s ease-in-out infinite alternate;filter:contrast(1.06) saturate(1.04)}.prh .pho{min-height:0;padding:0 4vw 8vh;position:relative;z-index:2;color:#f4faf6;width:100%}
 .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:3vw;padding:6vh 4vw;border-bottom:1px solid var(--line)}.meta span{display:block;color:var(--mut);font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6rem}.meta b{font-weight:400;font-size:1.3rem}
+.project-showcase{padding:0 4vw 12vh;width:100%}
+.project-showcase-inner{position:relative;width:100%;max-width:1400px;margin:0 auto;border-radius:4px;overflow:hidden;background:#0d1611;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.4);cursor:zoom-in}
+.project-full-photo{display:block;width:100%;height:auto;max-height:85vh;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.19,1,.22,1)}
+.project-showcase-inner:hover .project-full-photo{transform:scale(1.015)}
+.project-showcase-caption{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.8rem;background:rgba(10,18,14,.9);border-top:1px solid rgba(255,255,255,.08);backdrop-filter:blur(8px)}
+.project-showcase-caption .label{margin:0;color:var(--mut);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+@media (max-width:800px){.project-showcase{padding:0 4vw 8vh}.project-full-photo{max-height:60vh}}
 .gal{display:grid;grid-template-columns:1fr 1fr;gap:2vw;padding:0 4vw 12vh}.gal .gallery-thumb{display:block;position:relative;width:100%;aspect-ratio:4/5;padding:0;border:0;background:var(--line);overflow:hidden;cursor:zoom-in}.gal .gallery-thumb:nth-child(1),.gal .gallery-thumb:nth-child(4){grid-column:span 2;aspect-ratio:16/10}.gal .gallery-photo{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.19,1,.22,1)}.gal .gallery-thumb:hover .gallery-photo{transform:scale(1.025)}.gal .gallery-thumb:focus-visible,.viewer-thumb:focus-visible,.viewer-arrow:focus-visible,.viewer-close:focus-visible,.gallery-open:focus-visible{outline:2px solid var(--acc);outline-offset:4px}
 .nx{display:block;padding:18vh 4vw;text-align:center;border-top:1px solid var(--line)}.nx h2{font-size:clamp(2.5rem,8vw,8rem);line-height:1;transition:letter-spacing .8s cubic-bezier(.19,1,.22,1),color .5s}.nx:hover h2{letter-spacing:.03em;color:var(--acc)}
 @media (max-width:800px){.meta{grid-template-columns:1fr 1fr}.gal{grid-template-columns:1fr}.gal .gallery-thumb:nth-child(n){grid-column:auto;aspect-ratio:4/5}}
@@ -520,6 +527,13 @@ nav #mbtn{display:none;margin-left:auto;width:46px;height:46px;position:relative
 .im23,.im-clean5{--img:url("../images/cleaning-home.jpeg");--pos:center 50%}
 .im24{--img:url("../images/24-modern-living-curtains.jpg");--pos:center 50%}
 .im25{--img:url("../images/25-amb360-estate-cleaning.jpg");--pos:center 50%}
+.im26{--img:url("../images/26-olive-bedroom-drapery.jpg");--pos:center 50%}
+.im27{--img:url("../images/27-double-height-grand-salon.jpg");--pos:center 50%}
+.im28{--img:url("../images/28-cove-lounge-bar.jpg");--pos:center 50%}
+.im29{--img:url("../images/29-contemporary-kitchen.jpg");--pos:center 50%}
+
+.prh-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;display:none}
+.prh-video-scrim{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.1) 40%,rgba(0,0,0,.75));z-index:2;pointer-events:none;display:none}
 
 .lg{display:block;background-image:url("../images/logo.png");background-size:contain;background-repeat:no-repeat;background-position:center}
 
